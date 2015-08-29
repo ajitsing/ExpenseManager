@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="expense_types">
+        <item>Food</item>
+        <item>Transport</item>
+        <item>Transfer</item>
+        <item>Rent</item>
+        <item>Other</item>
+    </array>
+</resources>
