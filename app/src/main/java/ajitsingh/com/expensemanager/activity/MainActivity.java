@@ -1,9 +1,11 @@
-package ajitsingh.com.expensemanager;
+package ajitsingh.com.expensemanager.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import ajitsingh.com.expensemanager.R;
 
 
 public class MainActivity extends Activity {
