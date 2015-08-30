@@ -1,7 +1,10 @@
 package ajitsingh.com.expensemanager.activity;
 
-import android.app.Activity;
+import android.app.ActionBar;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,24 +15,44 @@ import android.widget.TextView;
 import java.util.List;
 
 import ajitsingh.com.expensemanager.R;
+import ajitsingh.com.expensemanager.adapter.HomeViewPagerAdapter;
 import ajitsingh.com.expensemanager.database.ExpenseDatabaseHelper;
-import ajitsingh.com.expensemanager.model.ExpenseType;
 import ajitsingh.com.expensemanager.presenter.ExpensePresenter;
 import ajitsingh.com.expensemanager.view.ExpenseView;
 
 
-public class MainActivity extends Activity implements ExpenseView {
+public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
 
-  private ExpenseDatabaseHelper expenseDatabaseHelper;
-  private ExpensePresenter expensePresenter;
+  private ActionBar actionBar;
+  private ViewPager viewPager;
 
   @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  protected void onCreate(Bundle savedInstanceState){
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    expenseDatabaseHelper = new ExpenseDatabaseHelper(this);
-    expensePresenter = new ExpensePresenter(expenseDatabaseHelper, this);
-    expensePresenter.setExpenseTypes();
+
+    actionBar = getActionBar();
+    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+    viewPager = (ViewPager) findViewById(R.id.view_pager);
+    viewPager.setAdapter(new HomeViewPagerAdapter(getSupportFragmentManager()));
+
+    addTabs();
+
+    viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+      @Override
+      public void onPageScrolled(int i, float v, int i2) {
+      }
+
+      @Override
+      public void onPageSelected(int i) {
+        actionBar.setSelectedNavigationItem(i);
+      }
+
+      @Override
+      public void onPageScrollStateChanged(int i) {
+      }
+    });
   }
 
   @Override
@@ -49,30 +72,30 @@ public class MainActivity extends Activity implements ExpenseView {
     return super.onOptionsItemSelected(item);
   }
 
-  public void addExpense(View view) {
-    expensePresenter.addExpense();
+  @Override
+  public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+    viewPager.setCurrentItem(tab.getPosition());
   }
 
   @Override
-  public String getAmount() {
-    TextView view = (TextView) this.findViewById(R.id.amount);
-    return view.getText().toString();
+  public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+
   }
 
   @Override
-  public String getType() {
-    Spinner spinner = (Spinner) this.findViewById(R.id.expense_type);
-    return (String) spinner.getSelectedItem();
+  public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+
   }
 
-  @Override
-  public ArrayAdapter<String> getExpenseTypeAdapter(List<String> expenseTypes) {
-    return new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, expenseTypes);
-  }
+  private void addTabs() {
+    ActionBar.Tab addNewExpenseTab = actionBar.newTab();
+    addNewExpenseTab.setTabListener(this);
+    addNewExpenseTab.setText("Add New");
+    actionBar.addTab(addNewExpenseTab);
 
-  @Override
-  public void renderExpenseTypes(ArrayAdapter<String> adapter) {
-    Spinner spinner = (Spinner) this.findViewById(R.id.expense_type);
-    spinner.setAdapter(adapter);
+    ActionBar.Tab todayTab = actionBar.newTab();
+    todayTab.setTabListener(this);
+    todayTab.setText("Today");
+    actionBar.addTab(todayTab);
   }
 }
