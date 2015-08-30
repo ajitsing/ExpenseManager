@@ -2,9 +2,11 @@ package ajitsingh.com.expensemanager.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ajitsingh.com.expensemanager.model.ExpenseType;
@@ -36,5 +38,20 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
 
       sqLiteDatabase.insert(ExpenseTypeTable.TABLE_NAME, null, contentValues);
     }
+  }
+
+  public List<String> getExpenseTypes() {
+    ArrayList<String> expenseTypes = new ArrayList<>();
+
+    SQLiteDatabase database = this.getWritableDatabase();
+    Cursor cursor = database.rawQuery(ExpenseTypeTable.SELECT_ALL, null);
+    cursor.moveToFirst();
+
+    do {
+      String type = cursor.getString(cursor.getColumnIndex(ExpenseTypeTable.TYPE));
+      expenseTypes.add(type);
+    } while(cursor.moveToNext());
+
+    return expenseTypes;
   }
 }

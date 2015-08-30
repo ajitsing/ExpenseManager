@@ -51,6 +51,7 @@
                 android:layout_marginTop="20dp"
                 style="@style/button_primary"
                 android:text="@string/add_expense"
+                android:onClick="addExpense"
                 android:layout_height="60dp"/>
         </LinearLayout>
     </LinearLayout>

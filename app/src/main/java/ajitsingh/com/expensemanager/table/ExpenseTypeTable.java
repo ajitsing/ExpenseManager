@@ -9,10 +9,11 @@ import java.util.List;
 import ajitsingh.com.expensemanager.model.ExpenseType;
 
 public class ExpenseTypeTable implements BaseColumns {
-  public final static String TABLE_NAME = "expense_types";
-  public final static String TYPE = "type";
+  public static final String TABLE_NAME = "expense_types";
+  public static final String TYPE = "type";
 
-  public final static String CREATE_TABLE_QUERY = "create table " + TABLE_NAME + " ("+ _ID +" INTEGER, "+ TYPE +" TEXT)";
+  public static final String CREATE_TABLE_QUERY = "create table " + TABLE_NAME + " ("+ _ID +" INTEGER, "+ TYPE +" TEXT)";
+  public static final String SELECT_ALL = "SELECT * FROM " + TABLE_NAME;
 
   public static List<ExpenseType> seedData(){
     ArrayList<ExpenseType> expenseTypes = new ArrayList<>();
