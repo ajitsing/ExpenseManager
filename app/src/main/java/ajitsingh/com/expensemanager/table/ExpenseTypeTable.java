@@ -12,7 +12,7 @@ public class ExpenseTypeTable implements BaseColumns {
   public static final String TABLE_NAME = "expense_types";
   public static final String TYPE = "type";
 
-  public static final String CREATE_TABLE_QUERY = "create table " + TABLE_NAME + " ("+ _ID +" INTEGER, "+ TYPE +" TEXT)";
+  public static final String CREATE_TABLE_QUERY = "create table " + TABLE_NAME + " ("+ _ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "+ TYPE +" TEXT)";
   public static final String SELECT_ALL = "SELECT * FROM " + TABLE_NAME;
 
   public static List<ExpenseType> seedData(){

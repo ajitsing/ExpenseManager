@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+import ajitsingh.com.expensemanager.model.Expense;
 import ajitsingh.com.expensemanager.model.ExpenseType;
 import ajitsingh.com.expensemanager.table.ExpenseTable;
 import ajitsingh.com.expensemanager.table.ExpenseTypeTable;
@@ -53,5 +54,15 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
     } while(cursor.moveToNext());
 
     return expenseTypes;
+  }
+
+  public void addExpense(Expense expense) {
+    SQLiteDatabase database = this.getWritableDatabase();
+    ContentValues values = new ContentValues();
+    values.put(ExpenseTable.AMOUNT, expense.getAmount());
+    values.put(ExpenseTable.TYPE, expense.getType());
+    values.put(ExpenseTable.DATE, expense.getDate().toString());
+
+    database.insert(ExpenseTable.TABLE_NAME, null, values);
   }
 }
