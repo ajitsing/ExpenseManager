@@ -8,7 +8,7 @@
                 android:background="@color/application_background">
 
     <TextView
-        android:text="Today's Expenses"
+        android:text="@string/todays_expenses"
         android:textColor="@color/white"
         android:textSize="25dp"
         android:textStyle="bold"
@@ -34,7 +34,7 @@
 
             <TextView
                 android:id="@+id/total_expense"
-                android:text="Total Expense - "
+                android:text="@string/total_expense"
                 android:textSize="25dp"
                 android:textColor="@color/application_background"
                 android:layout_width="wrap_content"
