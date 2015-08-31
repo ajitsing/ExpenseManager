@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import ajitsingh.com.expensemanager.model.Expense;
@@ -64,5 +65,23 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
     values.put(ExpenseTable.DATE, expense.getDate().toString());
 
     database.insert(ExpenseTable.TABLE_NAME, null, values);
+  }
+
+  public List<Expense> getExpenses() {
+    List<Expense> expenses = new ArrayList<>();
+    SQLiteDatabase database = this.getWritableDatabase();
+    Cursor cursor = database.rawQuery(ExpenseTable.SELECT_ALL, null);
+    cursor.moveToFirst();
+
+    do {
+      String type = cursor.getString(cursor.getColumnIndex(ExpenseTable.TYPE));
+      String amount = cursor.getString(cursor.getColumnIndex(ExpenseTable.AMOUNT));
+      String date = cursor.getString(cursor.getColumnIndex(ExpenseTable.DATE));
+      String id = cursor.getString(cursor.getColumnIndex(ExpenseTable._ID));
+
+      expenses.add(new Expense(Integer.valueOf(id), Long.valueOf(amount), type, new Date(date)));
+    } while(cursor.moveToNext());
+
+    return expenses;
   }
 }
