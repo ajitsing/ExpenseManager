@@ -7,18 +7,9 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.TextView;
-
-import java.util.List;
 
 import ajitsingh.com.expensemanager.R;
 import ajitsingh.com.expensemanager.adapter.HomeViewPagerAdapter;
-import ajitsingh.com.expensemanager.database.ExpenseDatabaseHelper;
-import ajitsingh.com.expensemanager.presenter.ExpensePresenter;
-import ajitsingh.com.expensemanager.view.ExpenseView;
 
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
@@ -74,6 +65,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
   @Override
   public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+    viewPager.setAdapter(new HomeViewPagerAdapter(getSupportFragmentManager()));
     viewPager.setCurrentItem(tab.getPosition());
   }
 

@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -39,6 +40,8 @@ public class ExpenseFragment extends Fragment implements ExpenseView{
       @Override
       public void onClick(View view) {
         expensePresenter.addExpense();
+        getActivity().getActionBar().setSelectedNavigationItem(1);
+        Toast.makeText(getActivity(), R.string.expense_add_successfully, Toast.LENGTH_LONG).show();
       }
     });
   }

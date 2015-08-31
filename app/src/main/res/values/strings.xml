@@ -7,4 +7,5 @@
     <string name="add_expense">Add Expense</string>
     <string name="todays_expenses">Today\'s Expenses</string>
     <string name="total_expense">Total Expense - </string>
+    <string name="expense_add_successfully" type="id">Expense Added Successfully</string>
 </resources>
