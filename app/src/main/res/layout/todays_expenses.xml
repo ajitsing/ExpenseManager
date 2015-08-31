@@ -32,6 +32,20 @@
             android:layout_marginBottom="10dp"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/total_expense"
+                android:text="Total Expense - "
+                android:textSize="25dp"
+                android:textColor="@color/application_background"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"/>
+
+            <TextView
+                android:background="@color/application_background"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_height="1.8dp"/>
+
             <ListView
                 android:id="@+id/todays_expenses_list"
                 android:layout_width="match_parent"

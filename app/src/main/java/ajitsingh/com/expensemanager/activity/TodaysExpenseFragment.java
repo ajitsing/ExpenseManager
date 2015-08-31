@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -13,8 +14,10 @@ import ajitsingh.com.expensemanager.R;
 import ajitsingh.com.expensemanager.adapter.TodaysExpenseListViewAdapter;
 import ajitsingh.com.expensemanager.database.ExpenseDatabaseHelper;
 import ajitsingh.com.expensemanager.model.Expense;
+import ajitsingh.com.expensemanager.presenter.TodaysExpensePresenter;
+import ajitsingh.com.expensemanager.view.TodaysExpenseView;
 
-public class TodaysExpenseFragment extends Fragment {
+public class TodaysExpenseFragment extends Fragment implements TodaysExpenseView {
   private ExpenseDatabaseHelper expenseDatabaseHelper;
 
   @Override
@@ -26,9 +29,21 @@ public class TodaysExpenseFragment extends Fragment {
   public void onActivityCreated(Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
     expenseDatabaseHelper = new ExpenseDatabaseHelper(this.getActivity());
-    ListView listView = (ListView) getActivity().findViewById(R.id.todays_expenses_list);
+    TodaysExpensePresenter todaysExpensePresenter = new TodaysExpensePresenter(this, expenseDatabaseHelper);
 
-    List<Expense> expenses = expenseDatabaseHelper.getExpenses();
+    todaysExpensePresenter.renderTodaysExpenses();
+    todaysExpensePresenter.renderTotalExpense();
+  }
+
+  @Override
+  public void displayTotalExpense(Long totalExpense) {
+    TextView totalExpenseTextBox = (TextView) getActivity().findViewById(R.id.total_expense);
+    totalExpenseTextBox.append(totalExpense.toString());
+  }
+
+  @Override
+  public void displayTodaysExpenses(List<Expense> expenses) {
+    ListView listView = (ListView) getActivity().findViewById(R.id.todays_expenses_list);
     listView.setAdapter(new TodaysExpenseListViewAdapter(expenses, getActivity(), android.R.layout.simple_list_item_1));
   }
 }
