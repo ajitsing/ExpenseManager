@@ -17,10 +17,11 @@ public class ExpenseTypeTable implements BaseColumns {
 
   public static List<ExpenseType> seedData(){
     ArrayList<ExpenseType> expenseTypes = new ArrayList<>();
-    expenseTypes.add(new ExpenseType("Rent"));
-    expenseTypes.add(new ExpenseType("Shopping"));
     expenseTypes.add(new ExpenseType("Food"));
     expenseTypes.add(new ExpenseType("Travel"));
+    expenseTypes.add(new ExpenseType("Health"));
+    expenseTypes.add(new ExpenseType("Shopping"));
+    expenseTypes.add(new ExpenseType("Rent"));
     expenseTypes.add(new ExpenseType("Money-Transfer"));
     expenseTypes.add(new ExpenseType("Other"));
 
