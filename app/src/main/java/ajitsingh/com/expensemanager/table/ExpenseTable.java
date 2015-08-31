@@ -14,5 +14,5 @@ public class ExpenseTable implements BaseColumns {
                                                       TYPE +" TEXT, "+
                                                       DATE +" TEXT )";
 
-  public static final String SELECT_ALL = "SELECT * FROM " + TABLE_NAME;
+  public static final String SELECT_ALL = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + _ID + " DESC";
 }
