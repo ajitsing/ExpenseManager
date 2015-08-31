@@ -47,12 +47,13 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
 
     SQLiteDatabase database = this.getWritableDatabase();
     Cursor cursor = database.rawQuery(ExpenseTypeTable.SELECT_ALL, null);
-    cursor.moveToFirst();
 
-    do {
-      String type = cursor.getString(cursor.getColumnIndex(ExpenseTypeTable.TYPE));
-      expenseTypes.add(type);
-    } while(cursor.moveToNext());
+    if(isCursorPopulated(cursor)){
+      do {
+        String type = cursor.getString(cursor.getColumnIndex(ExpenseTypeTable.TYPE));
+        expenseTypes.add(type);
+      } while(cursor.moveToNext());
+    }
 
     return expenseTypes;
   }
@@ -71,17 +72,22 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
     List<Expense> expenses = new ArrayList<>();
     SQLiteDatabase database = this.getWritableDatabase();
     Cursor cursor = database.rawQuery(ExpenseTable.SELECT_ALL, null);
-    cursor.moveToFirst();
 
-    do {
-      String type = cursor.getString(cursor.getColumnIndex(ExpenseTable.TYPE));
-      String amount = cursor.getString(cursor.getColumnIndex(ExpenseTable.AMOUNT));
-      String date = cursor.getString(cursor.getColumnIndex(ExpenseTable.DATE));
-      String id = cursor.getString(cursor.getColumnIndex(ExpenseTable._ID));
+    if(isCursorPopulated(cursor)){
+      do {
+        String type = cursor.getString(cursor.getColumnIndex(ExpenseTable.TYPE));
+        String amount = cursor.getString(cursor.getColumnIndex(ExpenseTable.AMOUNT));
+        String date = cursor.getString(cursor.getColumnIndex(ExpenseTable.DATE));
+        String id = cursor.getString(cursor.getColumnIndex(ExpenseTable._ID));
 
-      expenses.add(new Expense(Integer.valueOf(id), Long.valueOf(amount), type, new Date(date)));
-    } while(cursor.moveToNext());
+        expenses.add(new Expense(Integer.valueOf(id), Long.valueOf(amount), type, new Date(date)));
+      } while(cursor.moveToNext());
+    }
 
     return expenses;
+  }
+
+  private boolean isCursorPopulated(Cursor cursor) {
+    return cursor != null && cursor.moveToFirst();
   }
 }
