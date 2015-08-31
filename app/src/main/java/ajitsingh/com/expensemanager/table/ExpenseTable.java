@@ -10,7 +10,7 @@ public class ExpenseTable implements BaseColumns {
 
   public static final String CREATE_TABLE_QUERY = "create table " + TABLE_NAME + " ("+
                                                       _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                                                      AMOUNT +" REAL,"+
+                                                      AMOUNT +" INTEGER,"+
                                                       TYPE +" TEXT, "+
                                                       DATE +" TEXT )";
 

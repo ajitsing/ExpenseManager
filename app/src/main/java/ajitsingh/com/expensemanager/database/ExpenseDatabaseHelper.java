@@ -7,13 +7,15 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import ajitsingh.com.expensemanager.model.Expense;
 import ajitsingh.com.expensemanager.model.ExpenseType;
 import ajitsingh.com.expensemanager.table.ExpenseTable;
 import ajitsingh.com.expensemanager.table.ExpenseTypeTable;
+
+import static java.lang.Integer.parseInt;
+import static java.lang.Long.parseLong;
 
 public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
   public ExpenseDatabaseHelper(Context context) {
@@ -63,7 +65,7 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
     ContentValues values = new ContentValues();
     values.put(ExpenseTable.AMOUNT, expense.getAmount());
     values.put(ExpenseTable.TYPE, expense.getType());
-    values.put(ExpenseTable.DATE, expense.getDate().toString());
+    values.put(ExpenseTable.DATE, expense.getDate());
 
     database.insert(ExpenseTable.TABLE_NAME, null, values);
   }
@@ -80,7 +82,7 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
         String date = cursor.getString(cursor.getColumnIndex(ExpenseTable.DATE));
         String id = cursor.getString(cursor.getColumnIndex(ExpenseTable._ID));
 
-        expenses.add(new Expense(Integer.valueOf(id), Long.valueOf(amount), type, new Date(date)));
+        expenses.add(new Expense(parseInt(id), parseLong(amount), type, date));
       } while(cursor.moveToNext());
     }
 

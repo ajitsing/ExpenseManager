@@ -9,6 +9,8 @@ import ajitsingh.com.expensemanager.database.ExpenseDatabaseHelper;
 import ajitsingh.com.expensemanager.model.Expense;
 import ajitsingh.com.expensemanager.view.ExpenseView;
 
+import static ajitsingh.com.expensemanager.utils.DateUtil.getCurrentDateTime;
+
 public class ExpensePresenter {
 
   private ExpenseDatabaseHelper database;
@@ -20,7 +22,7 @@ public class ExpensePresenter {
   }
 
   public void addExpense() {
-    Expense expense = new Expense(Long.valueOf(view.getAmount()), view.getType(), new Date());
+    Expense expense = new Expense(Long.valueOf(view.getAmount()), view.getType(), getCurrentDateTime());
     database.addExpense(expense);
   }
 

@@ -1,11 +1,10 @@
 <resources>
     <string name="app_name">Expense Manager</string>
-
     <string name="action_settings">Settings</string>
     <string name="add_new_expense">Add New Expense</string>
     <string name="amount">Amount</string>
     <string name="add_expense">Add Expense</string>
     <string name="todays_expenses">Today\'s Expenses</string>
     <string name="total_expense">Total Expense - </string>
-    <string name="expense_add_successfully" type="id">Expense Added Successfully</string>
+    <string name="expense_add_successfully">Expense Added Successfully</string>
 </resources>

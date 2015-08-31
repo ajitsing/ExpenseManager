@@ -41,7 +41,7 @@ public class ExpenseFragment extends Fragment implements ExpenseView{
       public void onClick(View view) {
         expensePresenter.addExpense();
         getActivity().getActionBar().setSelectedNavigationItem(1);
-        Toast.makeText(getActivity(), R.string.expense_add_successfully, Toast.LENGTH_LONG).show();
+//        Toast.makeText(getActivity(), R.string.expense_add_successfully, Toast.LENGTH_LONG).show();
       }
     });
   }
