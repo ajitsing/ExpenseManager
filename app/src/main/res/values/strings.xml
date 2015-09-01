@@ -5,6 +5,7 @@
     <string name="amount">Amount</string>
     <string name="add_expense">Add Expense</string>
     <string name="todays_expenses">Today\'s Expenses</string>
+    <string name="current_week_expenses">Current Week\'s Expenses</string>
     <string name="total_expense">Total Expense - </string>
     <string name="expense_add_successfully">Expense Added Successfully</string>
 

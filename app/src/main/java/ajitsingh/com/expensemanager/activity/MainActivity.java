@@ -5,18 +5,24 @@ import android.app.FragmentTransaction;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import ajitsingh.com.expensemanager.R;
 import ajitsingh.com.expensemanager.adapter.HomeViewPagerAdapter;
+import ajitsingh.com.expensemanager.presenter.NavigationDrawerPresenter;
+import ajitsingh.com.expensemanager.view.NavigationDrawerItemView;
 
 
-public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
+public class MainActivity extends FragmentActivity implements NavigationDrawerItemView, ActionBar.TabListener {
 
   private ActionBar actionBar;
   private ViewPager viewPager;
@@ -50,6 +56,14 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
       public void onPageScrollStateChanged(int i) {
       }
     });
+  }
+
+  @Override
+  public void render(Fragment fragment) {
+    getSupportFragmentManager()
+      .beginTransaction()
+      .add(fragment, fragment.getClass().getSimpleName())
+      .commit();
   }
 
   @Override
@@ -117,5 +131,19 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     drawerLayout.setDrawerShadow(R.mipmap.drawer_shadow, GravityCompat.START);
     getActionBar().setHomeButtonEnabled(true);
     getActionBar().setDisplayHomeAsUpEnabled(true);
+
+    onDrawerItemSelected();
+  }
+
+  private void onDrawerItemSelected() {
+    ListView drawerList = (ListView) findViewById(R.id.drawer_list);
+    final NavigationDrawerPresenter navigationDrawerPresenter = new NavigationDrawerPresenter(this);
+    drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+      @Override
+      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        String[] drawerItems = getResources().getStringArray(R.array.drawer_items);
+        navigationDrawerPresenter.onItemSelected(drawerItems[position]);
+      }
+    });
   }
 }

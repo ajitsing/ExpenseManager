@@ -13,8 +13,9 @@ import ajitsingh.com.expensemanager.model.Expense;
 import ajitsingh.com.expensemanager.model.ExpenseType;
 import ajitsingh.com.expensemanager.table.ExpenseTable;
 import ajitsingh.com.expensemanager.table.ExpenseTypeTable;
-import ajitsingh.com.expensemanager.utils.DateUtil;
 
+import static ajitsingh.com.expensemanager.utils.DateUtil.getCurrentDate;
+import static ajitsingh.com.expensemanager.utils.DateUtil.getCurrentWeeksDates;
 import static java.lang.Integer.parseInt;
 import static java.lang.Long.parseLong;
 
@@ -80,8 +81,14 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
 
   public List<Expense> getTodaysExpenses() {
     SQLiteDatabase database = this.getWritableDatabase();
-    Cursor cursor = database.rawQuery(ExpenseTable.getExpensesForDate(DateUtil.getCurrentDate()), null);
+    Cursor cursor = database.rawQuery(ExpenseTable.getExpensesForDate(getCurrentDate()), null);
 
+    return buildExpenses(cursor);
+  }
+
+  public List<Expense> getCurrentWeeksExpenses() {
+    SQLiteDatabase database = this.getWritableDatabase();
+    Cursor cursor = database.rawQuery(ExpenseTable.getExpensesForDates(getCurrentWeeksDates()), null);
     return buildExpenses(cursor);
   }
 

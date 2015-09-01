@@ -2,6 +2,8 @@ package ajitsingh.com.expensemanager.table;
 
 import android.provider.BaseColumns;
 
+import java.util.ArrayList;
+
 public class ExpenseTable implements BaseColumns {
   public static final String TABLE_NAME = "expenses";
   public static final String AMOUNT = "amount";
@@ -18,5 +20,14 @@ public class ExpenseTable implements BaseColumns {
 
   public static String getExpensesForDate(String date){
     return "SELECT * FROM " + TABLE_NAME + " WHERE date like '"+date+"%' ORDER BY " + _ID + " DESC";
+  }
+
+  public static String getExpensesForDates(ArrayList<String> dates) {
+    String dateLike = "";
+    for (String date : dates){
+      dateLike += "date like '" + date + "%' " + (dates.get(dates.size() - 1) == date ? "" : "or ");
+    }
+
+    return "SELECT * FROM " + TABLE_NAME + " WHERE " + dateLike + " ORDER BY " + _ID + " DESC";
   }
 }
