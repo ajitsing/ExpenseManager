@@ -13,7 +13,7 @@ public class TodaysExpensePresenter {
 
   public TodaysExpensePresenter(TodaysExpenseView view, ExpenseDatabaseHelper expenseDatabaseHelper) {
     this.view = view;
-    expenses = expenseDatabaseHelper.getExpenses();
+    expenses = expenseDatabaseHelper.getTodaysExpenses();
   }
 
   public void renderTotalExpense() {

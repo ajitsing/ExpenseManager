@@ -15,4 +15,8 @@ public class ExpenseTable implements BaseColumns {
                                                       DATE +" TEXT )";
 
   public static final String SELECT_ALL = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + _ID + " DESC";
+
+  public static String getExpensesForDate(String date){
+    return "SELECT * FROM " + TABLE_NAME + " WHERE date like '"+date+"%' ORDER BY " + _ID + " DESC";
+  }
 }

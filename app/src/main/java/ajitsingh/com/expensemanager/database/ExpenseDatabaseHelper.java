@@ -13,6 +13,7 @@ import ajitsingh.com.expensemanager.model.Expense;
 import ajitsingh.com.expensemanager.model.ExpenseType;
 import ajitsingh.com.expensemanager.table.ExpenseTable;
 import ajitsingh.com.expensemanager.table.ExpenseTypeTable;
+import ajitsingh.com.expensemanager.utils.DateUtil;
 
 import static java.lang.Integer.parseInt;
 import static java.lang.Long.parseLong;
@@ -71,10 +72,21 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
   }
 
   public List<Expense> getExpenses() {
-    List<Expense> expenses = new ArrayList<>();
     SQLiteDatabase database = this.getWritableDatabase();
     Cursor cursor = database.rawQuery(ExpenseTable.SELECT_ALL, null);
 
+    return buildExpenses(cursor);
+  }
+
+  public List<Expense> getTodaysExpenses() {
+    SQLiteDatabase database = this.getWritableDatabase();
+    Cursor cursor = database.rawQuery(ExpenseTable.getExpensesForDate(DateUtil.getCurrentDate()), null);
+
+    return buildExpenses(cursor);
+  }
+
+  private List<Expense> buildExpenses(Cursor cursor) {
+    List<Expense> expenses = new ArrayList<>();
     if(isCursorPopulated(cursor)){
       do {
         String type = cursor.getString(cursor.getColumnIndex(ExpenseTable.TYPE));
