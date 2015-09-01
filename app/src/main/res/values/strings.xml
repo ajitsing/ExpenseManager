@@ -7,4 +7,10 @@
     <string name="todays_expenses">Today\'s Expenses</string>
     <string name="total_expense">Total Expense - </string>
     <string name="expense_add_successfully">Expense Added Successfully</string>
+
+    <array name="drawer_items">
+        <item>This Week</item>
+        <item>This Month</item>
+        <item>Date Range</item>
+    </array>
 </resources>

@@ -2,9 +2,13 @@ package ajitsingh.com.expensemanager.activity;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -16,12 +20,14 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
   private ActionBar actionBar;
   private ViewPager viewPager;
+  private ActionBarDrawerToggle actionBarDrawerToggle;
 
   @Override
   protected void onCreate(Bundle savedInstanceState){
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
+    configureDrawer();
     actionBar = getActionBar();
     actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
@@ -53,6 +59,18 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
   }
 
   @Override
+  public void onConfigurationChanged(Configuration newConfig) {
+    super.onConfigurationChanged(newConfig);
+    actionBarDrawerToggle.onConfigurationChanged(newConfig);
+  }
+
+  @Override
+  protected void onPostCreate(Bundle savedInstanceState) {
+    super.onPostCreate(savedInstanceState);
+    actionBarDrawerToggle.syncState();
+  }
+
+  @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     int id = item.getItemId();
 
@@ -60,7 +78,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
       return true;
     }
 
-    return super.onOptionsItemSelected(item);
+    return actionBarDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
   }
 
   @Override
@@ -89,5 +107,15 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     todayTab.setTabListener(this);
     todayTab.setText("Today");
     actionBar.addTab(todayTab);
+  }
+
+  private void configureDrawer() {
+    DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+
+    actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.mipmap.ic_menu_closed, R.mipmap.ic_menu_opened, R.string.action_settings);
+    drawerLayout.setDrawerListener(actionBarDrawerToggle);
+    drawerLayout.setDrawerShadow(R.mipmap.drawer_shadow, GravityCompat.START);
+    getActionBar().setHomeButtonEnabled(true);
+    getActionBar().setDisplayHomeAsUpEnabled(true);
   }
 }
