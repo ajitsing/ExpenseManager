@@ -9,13 +9,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class DateUtil {
-  public static final String DATE_TIME_FORMAT = "dd-MM-yyyy HH:mm";
   public static final String DATE_FORMAT = "dd-MM-yyyy";
-
-  public static String getCurrentDateTime(){
-    Calendar now = Calendar.getInstance();
-    return getFormattedDate(now, DATE_TIME_FORMAT);
-  }
 
   public static String getCurrentDate(){
     Calendar now = Calendar.getInstance();
