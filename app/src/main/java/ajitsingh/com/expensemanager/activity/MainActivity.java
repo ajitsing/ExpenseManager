@@ -1,16 +1,16 @@
 package ajitsingh.com.expensemanager.activity;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -62,11 +62,9 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerIt
   }
 
   @Override
-  public void render(Fragment fragment) {
-    getSupportFragmentManager()
-      .beginTransaction()
-      .replace(R.id.main_frame, fragment, fragment.getClass().getSimpleName())
-      .commit();
+  public void render(Class<? extends Activity> activityClass) {
+    Intent intent = new Intent(this, activityClass);
+    startActivity(intent);
   }
 
   @Override

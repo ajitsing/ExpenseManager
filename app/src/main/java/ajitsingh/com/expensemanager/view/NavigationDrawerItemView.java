@@ -1,7 +1,8 @@
 package ajitsingh.com.expensemanager.view;
 
-import android.support.v4.app.Fragment;
+
+import android.app.Activity;
 
 public interface NavigationDrawerItemView {
-  void render(Fragment fragment);
+  void render(Class<? extends Activity> activityClass);
 }
