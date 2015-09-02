@@ -13,6 +13,9 @@ import java.util.Map;
 
 import ajitsingh.com.expensemanager.R;
 import ajitsingh.com.expensemanager.model.Expense;
+import ajitsingh.com.expensemanager.utils.DateUtil;
+
+import static ajitsingh.com.expensemanager.utils.DateUtil.getDayName;
 
 public class CurrentWeeksExpenseAdapter implements ExpandableListAdapter {
   private Context context;
@@ -45,12 +48,13 @@ public class CurrentWeeksExpenseAdapter implements ExpandableListAdapter {
 
   @Override
   public Object getGroup(int position) {
-    List<Expense> expenses = this.expenses.get(this.expenses.keySet().toArray()[position]);
+    String date = (String) this.expenses.keySet().toArray()[position];
+    List<Expense> expenses = this.expenses.get(date);
     Long totalExpense = 0l;
     for (Expense expense : expenses)
       totalExpense += expense.getAmount();
 
-    return this.expenses.keySet().toArray()[position] + " - \u20B9" + totalExpense;
+    return date + " (" + getDayName(date) + ") - \u20B9" + totalExpense;
   }
 
   @Override

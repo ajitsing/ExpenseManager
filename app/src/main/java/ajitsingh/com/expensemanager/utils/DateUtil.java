@@ -1,8 +1,12 @@
 package ajitsingh.com.expensemanager.utils;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class DateUtil {
   public static final String DATE_TIME_FORMAT = "dd-MM-yyyy HH:mm";
@@ -32,6 +36,18 @@ public class DateUtil {
     dates.add(getFormattedDate(cal, DATE_FORMAT));
 
     return dates;
+  }
+
+  public static String getDayName(String dateString) {
+    DateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
+    Date date = null;
+    try { date = formatter.parse(dateString); }
+    catch (ParseException e) {}
+
+    Calendar calendar = Calendar.getInstance();
+    calendar.set(date.getYear(), date.getMonth(), date.getDay());
+
+    return calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.US);
   }
 
   private static String getFormattedDate(Calendar date, String format){
