@@ -33,13 +33,13 @@ public class DateUtil {
   }
 
   public static String getDayName(String dateString) {
-    DateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
+    DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
     Date date = null;
     try { date = formatter.parse(dateString); }
     catch (ParseException e) {}
 
     Calendar calendar = Calendar.getInstance();
-    calendar.set(date.getYear(), date.getMonth(), date.getDay());
+    calendar.setTime(date);
 
     return calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.US);
   }
