@@ -88,7 +88,7 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
 
   public List<Expense> getCurrentWeeksExpenses() {
     SQLiteDatabase database = this.getWritableDatabase();
-    Cursor cursor = database.rawQuery(ExpenseTable.getExpensesForDates(getCurrentWeeksDates()), null);
+    Cursor cursor = database.rawQuery(ExpenseTable.getConsolidatedExpensesForDates(getCurrentWeeksDates()), null);
     return buildExpenses(cursor);
   }
 
@@ -101,7 +101,8 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
         String date = cursor.getString(cursor.getColumnIndex(ExpenseTable.DATE));
         String id = cursor.getString(cursor.getColumnIndex(ExpenseTable._ID));
 
-        expenses.add(new Expense(parseInt(id), parseLong(amount), type, date));
+        Expense expense = id == null ? new Expense(parseLong(amount), type, date) : new Expense(parseInt(id), parseLong(amount), type, date);
+        expenses.add(expense);
       } while(cursor.moveToNext());
     }
 

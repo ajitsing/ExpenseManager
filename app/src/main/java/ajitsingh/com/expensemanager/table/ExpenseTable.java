@@ -22,12 +22,12 @@ public class ExpenseTable implements BaseColumns {
     return "SELECT * FROM " + TABLE_NAME + " WHERE date like '"+date+"%' ORDER BY " + _ID + " DESC";
   }
 
-  public static String getExpensesForDates(ArrayList<String> dates) {
+  public static String getConsolidatedExpensesForDates(ArrayList<String> dates) {
     String dateLike = "";
     for (String date : dates){
       dateLike += "date like '" + date + "%' " + (dates.get(dates.size() - 1) == date ? "" : "or ");
     }
 
-    return "SELECT * FROM " + TABLE_NAME + " WHERE " + dateLike + " ORDER BY " + _ID + " DESC";
+    return "SELECT "+ _ID +", date, type, sum(amount) as amount FROM " + TABLE_NAME + " WHERE " + dateLike + " GROUP BY date, type";
   }
 }
