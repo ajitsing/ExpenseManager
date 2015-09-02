@@ -13,7 +13,7 @@ import java.util.Map;
 
 import ajitsingh.com.expensemanager.R;
 import ajitsingh.com.expensemanager.model.Expense;
-import ajitsingh.com.expensemanager.utils.DateUtil;
+import ajitsingh.com.expensemanager.utils.ExpenseCollection;
 
 import static ajitsingh.com.expensemanager.utils.DateUtil.getDayName;
 
@@ -49,12 +49,9 @@ public class CurrentWeeksExpenseAdapter implements ExpandableListAdapter {
   @Override
   public Object getGroup(int position) {
     String date = (String) this.expenses.keySet().toArray()[position];
-    List<Expense> expenses = this.expenses.get(date);
-    Long totalExpense = 0l;
-    for (Expense expense : expenses)
-      totalExpense += expense.getAmount();
+    Long totalExpense = new ExpenseCollection(this.expenses.get(date)).getTotalExpense();
 
-    return date + " (" + getDayName(date) + ") - \u20B9" + totalExpense;
+    return date + " (" + getDayName(date) + ") - " + context.getString(R.string.rupee_sym) + totalExpense;
   }
 
   @Override

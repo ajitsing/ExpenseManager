@@ -3,6 +3,7 @@ package ajitsingh.com.expensemanager.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ public class CurrentWeekExpenseActivity extends Activity implements CurrentWeekE
 
     expenseDatabaseHelper = new ExpenseDatabaseHelper(this);
     CurrentWeekExpensePresenter presenter = new CurrentWeekExpensePresenter(expenseDatabaseHelper, this);
+    presenter.renderTotalExpenses();
     presenter.renderCurrentWeeksExpenses();
   }
 
@@ -31,5 +33,11 @@ public class CurrentWeekExpenseActivity extends Activity implements CurrentWeekE
   public void displayCurrentWeeksExpenses(Map<String, List<Expense>> expensesByDate) {
     ExpandableListView listView = (ExpandableListView) findViewById(R.id.current_week_expenses_list);
     listView.setAdapter(new CurrentWeeksExpenseAdapter(this, expensesByDate));
+  }
+
+  @Override
+  public void displayTotalExpenses(Long totalExpense) {
+    TextView totalExpenseTextBox = (TextView) findViewById(R.id.current_week_expense);
+    totalExpenseTextBox.setText(getString(R.string.total_expense) + " " + getString(R.string.rupee_sym) + totalExpense);
   }
 }

@@ -18,7 +18,6 @@ import ajitsingh.com.expensemanager.presenter.TodaysExpensePresenter;
 import ajitsingh.com.expensemanager.view.TodaysExpenseView;
 
 public class TodaysExpenseFragment extends Fragment implements TodaysExpenseView {
-  private TodaysExpensePresenter todaysExpensePresenter;
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,7 +28,7 @@ public class TodaysExpenseFragment extends Fragment implements TodaysExpenseView
   public void onActivityCreated(Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
     ExpenseDatabaseHelper expenseDatabaseHelper = new ExpenseDatabaseHelper(this.getActivity());
-    todaysExpensePresenter = new TodaysExpensePresenter(this, expenseDatabaseHelper);
+    TodaysExpensePresenter todaysExpensePresenter = new TodaysExpensePresenter(this, expenseDatabaseHelper);
 
     todaysExpensePresenter.renderTodaysExpenses();
     todaysExpensePresenter.renderTotalExpense();
@@ -38,7 +37,7 @@ public class TodaysExpenseFragment extends Fragment implements TodaysExpenseView
   @Override
   public void displayTotalExpense(Long totalExpense) {
     TextView totalExpenseTextBox = (TextView) getActivity().findViewById(R.id.total_expense);
-    totalExpenseTextBox.setText(getActivity().getString(R.string.total_expense) + " " + totalExpense.toString());
+    totalExpenseTextBox.setText(getActivity().getString(R.string.total_expense) + " " + getActivity().getString(R.string.rupee_sym) + totalExpense.toString());
   }
 
   @Override

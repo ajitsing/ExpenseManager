@@ -7,6 +7,7 @@
     <string name="todays_expenses">Today\'s Expenses</string>
     <string name="current_week_expenses">Current Week\'s Expenses</string>
     <string name="total_expense">Total Expense - </string>
+    <string name="rupee_sym">₹</string>
     <string name="expense_add_successfully">Expense Added Successfully</string>
 
     <array name="drawer_items">

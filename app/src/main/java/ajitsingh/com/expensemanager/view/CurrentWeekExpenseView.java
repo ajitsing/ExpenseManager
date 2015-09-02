@@ -7,4 +7,6 @@ import ajitsingh.com.expensemanager.model.Expense;
 
 public interface CurrentWeekExpenseView {
   void displayCurrentWeeksExpenses(Map<String, List<Expense>> expensesByDate);
+
+  void displayTotalExpenses(Long totalExpense);
 }
