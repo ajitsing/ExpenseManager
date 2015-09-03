@@ -9,4 +9,5 @@ public interface ExpenseView {
   String getType();
   ArrayAdapter<String> getExpenseTypeAdapter(List<String> expenseTypes);
   void renderExpenseTypes(ArrayAdapter<String> adapter);
+  void displayError();
 }

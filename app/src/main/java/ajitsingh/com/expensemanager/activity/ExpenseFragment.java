@@ -39,9 +39,10 @@ public class ExpenseFragment extends Fragment implements ExpenseView{
     addExpenseButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        expensePresenter.addExpense();
-        Toast.makeText(getActivity(), R.string.expense_add_successfully, Toast.LENGTH_LONG).show();
-        getActivity().getActionBar().setSelectedNavigationItem(1);
+        if(expensePresenter.addExpense()){
+          Toast.makeText(getActivity(), R.string.expense_add_successfully, Toast.LENGTH_LONG).show();
+          getActivity().getActionBar().setSelectedNavigationItem(1);
+        }
       }
     });
   }
@@ -67,5 +68,11 @@ public class ExpenseFragment extends Fragment implements ExpenseView{
   public void renderExpenseTypes(ArrayAdapter<String> adapter) {
     Spinner spinner = (Spinner) getActivity().findViewById(R.id.expense_type);
     spinner.setAdapter(adapter);
+  }
+
+  @Override
+  public void displayError() {
+    TextView view = (TextView) getActivity().findViewById(R.id.amount);
+    view.setError(getActivity().getString(R.string.amount_empty_error));
   }
 }

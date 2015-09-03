@@ -20,9 +20,17 @@ public class ExpensePresenter {
     this.view = view;
   }
 
-  public void addExpense() {
-    Expense expense = new Expense(Long.valueOf(view.getAmount()), view.getType(), getCurrentDate());
+  public boolean addExpense() {
+    String amount = view.getAmount();
+
+    if(amount.isEmpty()) {
+      view.displayError();
+      return false;
+    }
+
+    Expense expense = new Expense(Long.valueOf(amount), view.getType(), getCurrentDate());
     database.addExpense(expense);
+    return true;
   }
 
   public void setExpenseTypes() {
