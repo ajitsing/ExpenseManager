@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer"
-    android:background="@color/application_background"
+    android:background="@drawable/background_color"
     tools:context=".MainActivity">
 
     <FrameLayout
@@ -19,7 +19,7 @@
         android:dividerHeight="0.2sp"
         android:entries="@array/drawer_items"
         android:layout_gravity="start"
-        android:background="@color/dark_red"/>
+        android:background="@drawable/background_color"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"
