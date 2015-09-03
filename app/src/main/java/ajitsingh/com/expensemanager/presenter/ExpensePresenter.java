@@ -1,9 +1,5 @@
 package ajitsingh.com.expensemanager.presenter;
 
-import android.widget.ArrayAdapter;
-
-import java.util.List;
-
 import ajitsingh.com.expensemanager.database.ExpenseDatabaseHelper;
 import ajitsingh.com.expensemanager.model.Expense;
 import ajitsingh.com.expensemanager.view.ExpenseView;
@@ -34,8 +30,6 @@ public class ExpensePresenter {
   }
 
   public void setExpenseTypes() {
-    List<String> expenseTypes = database.getExpenseTypes();
-    ArrayAdapter<String> adapter = view.getExpenseTypeAdapter(expenseTypes);
-    view.renderExpenseTypes(adapter);
+    view.renderExpenseTypes(database.getExpenseTypes());
   }
 }

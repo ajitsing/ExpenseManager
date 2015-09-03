@@ -18,7 +18,7 @@ import ajitsingh.com.expensemanager.database.ExpenseDatabaseHelper;
 import ajitsingh.com.expensemanager.presenter.ExpensePresenter;
 import ajitsingh.com.expensemanager.view.ExpenseView;
 
-public class ExpenseFragment extends Fragment implements ExpenseView{
+public class ExpenseFragment extends Fragment implements ExpenseView {
   private ExpenseDatabaseHelper expenseDatabaseHelper;
   private ExpensePresenter expensePresenter;
 
@@ -60,13 +60,9 @@ public class ExpenseFragment extends Fragment implements ExpenseView{
   }
 
   @Override
-  public ArrayAdapter<String> getExpenseTypeAdapter(List<String> expenseTypes) {
-    return new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, expenseTypes);
-  }
-
-  @Override
-  public void renderExpenseTypes(ArrayAdapter<String> adapter) {
+  public void renderExpenseTypes(List<String> expenseTypes) {
     Spinner spinner = (Spinner) getActivity().findViewById(R.id.expense_type);
+    ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, expenseTypes);
     spinner.setAdapter(adapter);
   }
 
