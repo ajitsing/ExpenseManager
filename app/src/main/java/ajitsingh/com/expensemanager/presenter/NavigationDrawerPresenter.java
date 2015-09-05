@@ -1,5 +1,6 @@
 package ajitsingh.com.expensemanager.presenter;
 
+import ajitsingh.com.expensemanager.activity.CurrentMonthExpenseActivity;
 import ajitsingh.com.expensemanager.activity.CurrentWeekExpenseActivity;
 import ajitsingh.com.expensemanager.view.NavigationDrawerItemView;
 
@@ -15,6 +16,8 @@ public class NavigationDrawerPresenter {
     switch (drawerItem){
       case "This Week":
         view.render(CurrentWeekExpenseActivity.class);
+      case "This Month":
+        view.render(CurrentMonthExpenseActivity.class);
     }
   }
 }

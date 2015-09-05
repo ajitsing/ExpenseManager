@@ -10,6 +10,7 @@
     <string name="rupee_sym">₹</string>
     <string name="expense_add_successfully">Expense Added Successfully</string>
     <string name="amount_empty_error">Amount can not be empty!!</string>
+    <string name="current_months_expenses">Current Month\'s Expenses</string>
 
     <array name="drawer_items">
         <item>This Week</item>
