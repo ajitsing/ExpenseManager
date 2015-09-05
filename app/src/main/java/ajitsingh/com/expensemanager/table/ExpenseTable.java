@@ -18,6 +18,8 @@ public class ExpenseTable implements BaseColumns {
 
   public static final String SELECT_ALL = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + _ID + " DESC";
 
+  public static final String SELECT_ALL_GROUP_BY_CATEGORY = "SELECT "+_ID+", date, type, sum(amount) as amount FROM " + TABLE_NAME + " GROUP BY type";
+
   public static String getExpensesForDate(String date){
     return "SELECT * FROM " + TABLE_NAME + " WHERE date like '"+date+"%' ORDER BY " + _ID + " DESC";
   }

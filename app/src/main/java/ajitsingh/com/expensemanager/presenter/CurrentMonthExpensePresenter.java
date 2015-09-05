@@ -9,6 +9,7 @@ import java.util.List;
 
 import ajitsingh.com.expensemanager.database.ExpenseDatabaseHelper;
 import ajitsingh.com.expensemanager.model.Expense;
+import ajitsingh.com.expensemanager.utils.ExpenseCollection;
 import ajitsingh.com.expensemanager.view.CurrentMonthExpenseView;
 
 
@@ -24,8 +25,10 @@ public class CurrentMonthExpensePresenter {
   public void plotGraph() {
     List<Bar> points = new ArrayList<Bar>();
 
-    List<Expense> expenses = database.getExpenses();
-    for (Expense expense : expenses) {
+    List<Expense> expenses = database.getExpensesGroupByCategory();
+    ExpenseCollection expenseCollection = new ExpenseCollection(expenses);
+
+    for (Expense expense : expenseCollection.withoutMoneyTransfer()) {
       Bar bar = new Bar();
       bar.setColor(Color.parseColor("#B50012"));
       bar.setName(expense.getType());

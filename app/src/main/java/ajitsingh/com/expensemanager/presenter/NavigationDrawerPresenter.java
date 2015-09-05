@@ -16,8 +16,10 @@ public class NavigationDrawerPresenter {
     switch (drawerItem){
       case "This Week":
         view.render(CurrentWeekExpenseActivity.class);
+        break;
       case "This Month":
         view.render(CurrentMonthExpenseActivity.class);
+        break;
     }
   }
 }

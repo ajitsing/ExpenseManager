@@ -92,6 +92,12 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
     return buildExpenses(cursor);
   }
 
+  public List<Expense> getExpensesGroupByCategory() {
+    SQLiteDatabase database = this.getWritableDatabase();
+    Cursor cursor = database.rawQuery(ExpenseTable.SELECT_ALL_GROUP_BY_CATEGORY, null);
+    return buildExpenses(cursor);
+  }
+
   private List<Expense> buildExpenses(Cursor cursor) {
     List<Expense> expenses = new ArrayList<>();
     if(isCursorPopulated(cursor)){
