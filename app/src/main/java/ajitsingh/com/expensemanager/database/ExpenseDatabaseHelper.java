@@ -105,6 +105,14 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
     return buildExpenses(cursor);
   }
 
+  public void addCategory(ExpenseType type) {
+    SQLiteDatabase database = this.getWritableDatabase();
+    ContentValues values = new ContentValues();
+    values.put(ExpenseTable.TYPE, type.getType());
+
+    database.insert(ExpenseTypeTable.TABLE_NAME, null, values);
+  }
+
   private List<Expense> buildExpenses(Cursor cursor) {
     List<Expense> expenses = new ArrayList<>();
     if(isCursorPopulated(cursor)){

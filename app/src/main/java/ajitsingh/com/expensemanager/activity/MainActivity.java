@@ -2,6 +2,7 @@ package ajitsingh.com.expensemanager.activity;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -29,6 +30,7 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerIt
   private ViewPager viewPager;
   private ActionBarDrawerToggle actionBarDrawerToggle;
   private DrawerLayout drawerLayout;
+  public static final int ADD_NEW_CAT = 9991;
 
   @Override
   protected void onCreate(Bundle savedInstanceState){
@@ -106,7 +108,22 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerIt
       return true;
     }
 
+    if (id == R.id.action_add_category) {
+      Intent intent = new Intent(this, AddCategoryActivity.class);
+      startActivityForResult(intent, ADD_NEW_CAT);
+      return true;
+    }
+
     return actionBarDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
+  }
+
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    if(requestCode == ADD_NEW_CAT){
+      viewPager.setAdapter(new HomeViewPagerAdapter(getSupportFragmentManager()));
+      viewPager.setCurrentItem(0);
+    }
   }
 
   @Override
