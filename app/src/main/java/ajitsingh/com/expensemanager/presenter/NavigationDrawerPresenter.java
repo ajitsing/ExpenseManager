@@ -1,7 +1,7 @@
 package ajitsingh.com.expensemanager.presenter;
 
-import ajitsingh.com.expensemanager.activity.CurrentMonthExpenseActivity;
-import ajitsingh.com.expensemanager.activity.CurrentWeekExpenseActivity;
+import ajitsingh.com.expensemanager.activity.CurrentMonthExpenseFragment;
+import ajitsingh.com.expensemanager.activity.CurrentWeekExpenseFragment;
 import ajitsingh.com.expensemanager.view.NavigationDrawerItemView;
 
 public class NavigationDrawerPresenter {
@@ -15,10 +15,10 @@ public class NavigationDrawerPresenter {
   public void onItemSelected(String drawerItem) {
     switch (drawerItem){
       case "This Week":
-        view.render(CurrentWeekExpenseActivity.class);
+        view.render(new CurrentWeekExpenseFragment());
         break;
       case "This Month":
-        view.render(CurrentMonthExpenseActivity.class);
+        view.render(new CurrentMonthExpenseFragment());
         break;
     }
   }

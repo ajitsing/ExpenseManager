@@ -17,8 +17,5 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.CurrentWeekExpenseActivity"/>
-        <activity android:name=".activity.CurrentMonthExpenseActivity"/>
     </application>
-
 </manifest>

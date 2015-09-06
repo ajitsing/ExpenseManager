@@ -1,12 +1,11 @@
 package ajitsingh.com.expensemanager.activity;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -62,9 +61,21 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerIt
   }
 
   @Override
-  public void render(Class<? extends Activity> activityClass) {
-    Intent intent = new Intent(this, activityClass);
-    startActivity(intent);
+  public void render(Fragment fragment) {
+    getSupportFragmentManager().beginTransaction()
+      .addToBackStack(MainActivity.class.getSimpleName())
+      .replace(R.id.main_frame, fragment, fragment.getClass().getSimpleName())
+      .commit();
+
+    findViewById(R.id.main_frame).bringToFront();
+    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+  }
+
+  @Override
+  public void onBackPressed() {
+    super.onBackPressed();
+    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+    actionBar.setTitle(R.string.app_name);
   }
 
   @Override
