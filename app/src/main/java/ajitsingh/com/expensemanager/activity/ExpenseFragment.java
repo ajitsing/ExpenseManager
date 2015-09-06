@@ -18,8 +18,7 @@ import ajitsingh.com.expensemanager.database.ExpenseDatabaseHelper;
 import ajitsingh.com.expensemanager.presenter.ExpensePresenter;
 import ajitsingh.com.expensemanager.view.ExpenseView;
 
-public class ExpenseFragment extends Fragment implements ExpenseView {
-  private ExpenseDatabaseHelper expenseDatabaseHelper;
+public class ExpenseFragment extends Fragment implements ExpenseView, View.OnClickListener {
   private ExpensePresenter expensePresenter;
 
   @Override
@@ -31,20 +30,12 @@ public class ExpenseFragment extends Fragment implements ExpenseView {
   public void onActivityCreated(Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
 
-    expenseDatabaseHelper = new ExpenseDatabaseHelper(this.getActivity());
+    ExpenseDatabaseHelper expenseDatabaseHelper = new ExpenseDatabaseHelper(this.getActivity());
     expensePresenter = new ExpensePresenter(expenseDatabaseHelper, this);
     expensePresenter.setExpenseTypes();
 
     Button addExpenseButton = (Button) getActivity().findViewById(R.id.add_expense);
-    addExpenseButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        if(expensePresenter.addExpense()){
-          Toast.makeText(getActivity(), R.string.expense_add_successfully, Toast.LENGTH_LONG).show();
-          getActivity().getActionBar().setSelectedNavigationItem(1);
-        }
-      }
-    });
+    addExpenseButton.setOnClickListener(this);
   }
 
   @Override
@@ -70,5 +61,13 @@ public class ExpenseFragment extends Fragment implements ExpenseView {
   public void displayError() {
     TextView view = (TextView) getActivity().findViewById(R.id.amount);
     view.setError(getActivity().getString(R.string.amount_empty_error));
+  }
+
+  @Override
+  public void onClick(View view) {
+    if(expensePresenter.addExpense()){
+      Toast.makeText(getActivity(), R.string.expense_add_successfully, Toast.LENGTH_LONG).show();
+      getActivity().getActionBar().setSelectedNavigationItem(1);
+    }
   }
 }
