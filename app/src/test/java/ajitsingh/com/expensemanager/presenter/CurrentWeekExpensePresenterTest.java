@@ -34,9 +34,9 @@ public class CurrentWeekExpensePresenterTest {
 
     DateTimeUtils.setCurrentMillisFixed(new DateTime("2015-09-06").getMillis());
     Expense expense1 = new Expense(90l, "Food", "03-09-2015");
-    Expense expense4 = new Expense(100l, "Travel", "31-08-2015");
+    Expense expense2 = new Expense(100l, "Travel", "31-08-2015");
 
-    when(database.getCurrentWeeksExpenses()).thenReturn(asList(expense1, expense4));
+    when(database.getCurrentWeeksExpenses()).thenReturn(asList(expense1, expense2));
 
     presenter = new CurrentWeekExpensePresenter(database, view);
   }
