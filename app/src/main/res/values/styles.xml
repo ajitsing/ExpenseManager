@@ -3,6 +3,7 @@
         <item name="android:actionBarStyle">@style/MyActionBar</item>
         <item name="android:actionBarTabBarStyle">@style/MyTabWidget</item>
         <item name="android:actionBarTabTextStyle">@style/TabTextStyle</item>
+        <item name="android:logo">@android:color/transparent</item>
     </style>
 
     <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
