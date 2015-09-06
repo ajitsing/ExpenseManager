@@ -74,7 +74,9 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerIt
   @Override
   public void onBackPressed() {
     super.onBackPressed();
-    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+    int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
+    if(backStackEntryCount == 0)
+      actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
     actionBar.setTitle(R.string.app_name);
   }
 
