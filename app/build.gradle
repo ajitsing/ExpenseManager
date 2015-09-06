@@ -25,4 +25,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:1.10.19'
     compile 'org.quanqi:android-holo-graph:0.1.0'
+    testCompile 'joda-time:joda-time:2.8.2'
+    compile 'joda-time:joda-time:2.8.2'
 }

@@ -1,5 +1,9 @@
 package ajitsingh.com.expensemanager.utils;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeConstants;
+import org.joda.time.LocalDate;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,22 +16,17 @@ public class DateUtil {
   public static final String DATE_FORMAT = "dd-MM-yyyy";
 
   public static String getCurrentDate(){
-    Calendar now = Calendar.getInstance();
-    return getFormattedDate(now, DATE_FORMAT);
+    return DateTime.now().toString(DATE_FORMAT);
   }
 
   public static ArrayList<String> getCurrentWeeksDates(){
     ArrayList<String> dates = new ArrayList<>();
 
-    Calendar cal = Calendar.getInstance();
-
-    for (int day = Calendar.MONDAY; day <= Calendar.SATURDAY; day++){
-      cal.set(Calendar.DAY_OF_WEEK, day);
-      dates.add(getFormattedDate(cal, DATE_FORMAT));
+    LocalDate now = new LocalDate();
+    for (int day = DateTimeConstants.MONDAY; day <= DateTimeConstants.SUNDAY; day++){
+      LocalDate localDate = now.withDayOfWeek(day);
+      dates.add(getFormattedDate(localDate, DATE_FORMAT));
     }
-
-    cal.add(Calendar.DATE, 1);
-    dates.add(getFormattedDate(cal, DATE_FORMAT));
 
     return dates;
   }
@@ -44,8 +43,8 @@ public class DateUtil {
     return calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.US);
   }
 
-  private static String getFormattedDate(Calendar date, String format){
+  private static String getFormattedDate(LocalDate date, String format){
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
-    return simpleDateFormat.format(date.getTime());
+    return simpleDateFormat.format(date.toDate());
   }
 }
