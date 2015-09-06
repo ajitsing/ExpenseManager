@@ -33,6 +33,12 @@ public class DateUtilTest {
   }
 
   @Test
+  public void shouldReturnCurrentMonthOfYear() throws Exception {
+    String currentMonthOfYear = DateUtil.currentMonthOfYear();
+    assertThat(currentMonthOfYear, is("09-2015"));
+  }
+
+  @Test
   public void shouldReturnCurrentDate() throws Exception {
     String date = DateUtil.getCurrentDate();
     assertThat(date, is("06-09-2015"));

@@ -32,4 +32,9 @@ public class ExpenseTable implements BaseColumns {
 
     return "SELECT "+ _ID +", date, type, sum(amount) as amount FROM " + TABLE_NAME + " WHERE " + dateLike + " GROUP BY date, type";
   }
+
+  public static String getExpenseForCurrentMonth(String currentMonthOfYear) {
+    return "SELECT " + _ID + ", date, type, sum(amount) as amount FROM " +
+      TABLE_NAME + " GROUP BY type HAVING date like '%-"+ currentMonthOfYear+ "'";
+  }
 }

@@ -31,6 +31,12 @@ public class DateUtil {
     return dates;
   }
 
+  public static String currentMonthOfYear() {
+    String date = DateTime.now().toString(DATE_FORMAT);
+    String[] split = date.split("-");
+    return split[1] + "-" + split[2];
+  }
+
   public static String getDayName(String dateString) {
     DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
     Date date = null;

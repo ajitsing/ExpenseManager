@@ -13,6 +13,7 @@ import ajitsingh.com.expensemanager.model.Expense;
 import ajitsingh.com.expensemanager.model.ExpenseType;
 import ajitsingh.com.expensemanager.table.ExpenseTable;
 import ajitsingh.com.expensemanager.table.ExpenseTypeTable;
+import ajitsingh.com.expensemanager.utils.DateUtil;
 
 import static ajitsingh.com.expensemanager.utils.DateUtil.getCurrentDate;
 import static ajitsingh.com.expensemanager.utils.DateUtil.getCurrentWeeksDates;
@@ -95,6 +96,12 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
   public List<Expense> getExpensesGroupByCategory() {
     SQLiteDatabase database = this.getWritableDatabase();
     Cursor cursor = database.rawQuery(ExpenseTable.SELECT_ALL_GROUP_BY_CATEGORY, null);
+    return buildExpenses(cursor);
+  }
+
+  public List<Expense> getExpensesForCurrentMonthGroupByCategory() {
+    SQLiteDatabase database = this.getWritableDatabase();
+    Cursor cursor = database.rawQuery(ExpenseTable.getExpenseForCurrentMonth(DateUtil.currentMonthOfYear()), null);
     return buildExpenses(cursor);
   }
 

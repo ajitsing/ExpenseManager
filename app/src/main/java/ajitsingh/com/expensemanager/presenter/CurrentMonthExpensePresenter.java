@@ -25,7 +25,7 @@ public class CurrentMonthExpensePresenter {
   public void plotGraph() {
     List<Bar> points = new ArrayList<Bar>();
 
-    List<Expense> expenses = database.getExpensesGroupByCategory();
+    List<Expense> expenses = database.getExpensesForCurrentMonthGroupByCategory();
     ExpenseCollection expenseCollection = new ExpenseCollection(expenses);
 
     for (Expense expense : expenseCollection.withoutMoneyTransfer()) {
