@@ -111,10 +111,6 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerIt
   public boolean onOptionsItemSelected(MenuItem item) {
     int id = item.getItemId();
 
-    if (id == R.id.action_settings) {
-      return true;
-    }
-
     if (id == R.id.action_add_category) {
       Intent intent = new Intent(this, AddCategoryActivity.class);
       startActivityForResult(intent, ADD_NEW_CAT);
