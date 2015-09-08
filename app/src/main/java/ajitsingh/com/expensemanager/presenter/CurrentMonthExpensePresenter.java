@@ -15,18 +15,16 @@ import ajitsingh.com.expensemanager.view.CurrentMonthExpenseView;
 
 public class CurrentMonthExpensePresenter {
   private final CurrentMonthExpenseView view;
-  private final ExpenseDatabaseHelper database;
+  private final ExpenseCollection expenseCollection;
 
   public CurrentMonthExpensePresenter(CurrentMonthExpenseView view, ExpenseDatabaseHelper database) {
     this.view = view;
-    this.database = database;
+    List<Expense> expenses = database.getExpensesForCurrentMonthGroupByCategory();
+    expenseCollection = new ExpenseCollection(expenses);
   }
 
   public void plotGraph() {
     List<Bar> points = new ArrayList<Bar>();
-
-    List<Expense> expenses = database.getExpensesForCurrentMonthGroupByCategory();
-    ExpenseCollection expenseCollection = new ExpenseCollection(expenses);
 
     for (Expense expense : expenseCollection.withoutMoneyTransfer()) {
       Bar bar = new Bar();
@@ -36,6 +34,10 @@ public class CurrentMonthExpensePresenter {
       points.add(bar);
     }
 
-    view.renderGraph(points);
+    view.displayGraph(points);
+  }
+
+  public void showTotalExpense() {
+    view.displayTotalExpense(expenseCollection.getTotalExpense());
   }
 }

@@ -5,5 +5,7 @@ import com.echo.holographlibrary.Bar;
 import java.util.List;
 
 public interface CurrentMonthExpenseView {
-  void renderGraph(List<Bar> points);
+  void displayGraph(List<Bar> points);
+
+  void displayTotalExpense(Long totalExpense);
 }

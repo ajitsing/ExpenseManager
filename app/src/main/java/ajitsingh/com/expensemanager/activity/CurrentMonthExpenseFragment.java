@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.echo.holographlibrary.Bar;
 import com.echo.holographlibrary.BarGraph;
@@ -32,11 +33,18 @@ public class CurrentMonthExpenseFragment extends Fragment implements CurrentMont
     CurrentMonthExpensePresenter presenter = new CurrentMonthExpensePresenter(this, expenseDatabaseHelper);
 
     presenter.plotGraph();
+    presenter.showTotalExpense();
   }
 
   @Override
-  public void renderGraph(List<Bar> points) {
+  public void displayGraph(List<Bar> points) {
     BarGraph graph = (BarGraph)getActivity().findViewById(R.id.graph);
     graph.setBars((ArrayList<Bar>) points);
+  }
+
+  @Override
+  public void displayTotalExpense(Long totalExpense) {
+    TextView totalExpenseTextBox = (TextView) getActivity().findViewById(R.id.current_months_total_expense);
+    totalExpenseTextBox.setText(getString(R.string.total_expense) + " " + getString(R.string.rupee_sym) + totalExpense);
   }
 }
