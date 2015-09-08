@@ -19,8 +19,8 @@
     <string name="add_category_success">Category added successfully..</string>
 
     <array name="drawer_items">
+        <item>Home</item>
         <item>This Week</item>
         <item>This Month</item>
-        <item>Date Range</item>
     </array>
 </resources>

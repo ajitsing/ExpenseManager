@@ -19,6 +19,7 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import ajitsingh.com.expensemanager.R;
+import ajitsingh.com.expensemanager.adapter.DrawerListViewAdapter;
 import ajitsingh.com.expensemanager.adapter.HomeViewPagerAdapter;
 import ajitsingh.com.expensemanager.presenter.NavigationDrawerPresenter;
 import ajitsingh.com.expensemanager.view.NavigationDrawerItemView;
@@ -71,6 +72,12 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerIt
 
     findViewById(R.id.main_frame).bringToFront();
     actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+  }
+
+  @Override
+  public void goToHome() {
+    Intent intent = new Intent(this, MainActivity.class);
+    startActivity(intent);
   }
 
   @Override
@@ -168,6 +175,10 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerIt
     drawerLayout.setDrawerShadow(R.mipmap.drawer_shadow, GravityCompat.START);
     getActionBar().setHomeButtonEnabled(true);
     getActionBar().setDisplayHomeAsUpEnabled(true);
+
+    ListView drawerList = (ListView) findViewById(R.id.drawer_list);
+    drawerList.setAdapter(new DrawerListViewAdapter(this));
+
     onDrawerItemSelected();
   }
 

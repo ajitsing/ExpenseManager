@@ -20,6 +20,9 @@ public class NavigationDrawerPresenter {
       case "This Month":
         view.render(new CurrentMonthExpenseFragment());
         break;
+      case "Home":
+        view.goToHome();
+        break;
     }
   }
 }
