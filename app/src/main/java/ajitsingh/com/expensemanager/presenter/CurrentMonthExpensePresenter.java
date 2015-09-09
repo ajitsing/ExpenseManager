@@ -28,7 +28,7 @@ public class CurrentMonthExpensePresenter {
 
     for (Expense expense : expenseCollection.withoutMoneyTransfer()) {
       Bar bar = new Bar();
-      bar.setColor(Color.parseColor("#B50012"));
+      bar.setColor(view.getGraphColor());
       bar.setName(expense.getType());
       bar.setValue(expense.getAmount());
       points.add(bar);

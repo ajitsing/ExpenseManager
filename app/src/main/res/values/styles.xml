@@ -7,7 +7,7 @@
     </style>
 
     <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@drawable/header_background_color</item>
+        <item name="android:background">@color/light_blue</item>
     </style>
 
     <style name="TabTextStyle" parent="@android:style/Widget.Holo.Light.ActionBar.TabText">
@@ -15,7 +15,7 @@
     </style>
 
     <style name="MyTabWidget" parent="@android:style/Widget.Holo.TabWidget">
-        <item name="android:background">@drawable/header_background_color</item>
+        <item name="android:background">@color/light_blue</item>
     </style>
 
     <style name="button_primary">

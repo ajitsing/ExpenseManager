@@ -1,5 +1,6 @@
 package ajitsingh.com.expensemanager.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -46,5 +47,10 @@ public class CurrentMonthExpenseFragment extends Fragment implements CurrentMont
   public void displayTotalExpense(Long totalExpense) {
     TextView totalExpenseTextBox = (TextView) getActivity().findViewById(R.id.current_months_total_expense);
     totalExpenseTextBox.setText(getString(R.string.total_expense) + " " + getString(R.string.rupee_sym) + totalExpense);
+  }
+
+  @Override
+  public int getGraphColor() {
+    return getActivity().getResources().getColor(R.color.light_blue);
   }
 }

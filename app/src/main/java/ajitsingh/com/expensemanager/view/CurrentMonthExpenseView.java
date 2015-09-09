@@ -8,4 +8,6 @@ public interface CurrentMonthExpenseView {
   void displayGraph(List<Bar> points);
 
   void displayTotalExpense(Long totalExpense);
+
+  int getGraphColor();
 }
