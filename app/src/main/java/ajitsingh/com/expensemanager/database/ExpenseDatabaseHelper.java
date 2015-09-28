@@ -21,8 +21,10 @@ import static java.lang.Integer.parseInt;
 import static java.lang.Long.parseLong;
 
 public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
+  public static final String EXPENSE_DB = "expense";
+
   public ExpenseDatabaseHelper(Context context) {
-    super(context, "expense", null, 1);
+    super(context, EXPENSE_DB, null, 1);
   }
 
   @Override
@@ -35,16 +37,6 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
   @Override
   public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
 
-  }
-
-  private void seedExpenseTypes(SQLiteDatabase sqLiteDatabase) {
-    List<ExpenseType> expenseTypes = ExpenseTypeTable.seedData();
-    for (ExpenseType expenseType : expenseTypes) {
-      ContentValues contentValues = new ContentValues();
-      contentValues.put(ExpenseTypeTable.TYPE, expenseType.getType());
-
-      sqLiteDatabase.insert(ExpenseTypeTable.TABLE_NAME, null, contentValues);
-    }
   }
 
   public List<String> getExpenseTypes() {
@@ -105,12 +97,17 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
     return buildExpenses(cursor);
   }
 
-  public void addCategory(ExpenseType type) {
+  public void addExpenseType(ExpenseType type) {
     SQLiteDatabase database = this.getWritableDatabase();
     ContentValues values = new ContentValues();
     values.put(ExpenseTable.TYPE, type.getType());
 
     database.insert(ExpenseTypeTable.TABLE_NAME, null, values);
+  }
+
+  public void truncate(String tableName) {
+    SQLiteDatabase database = this.getWritableDatabase();
+    database.execSQL("delete from " + tableName);
   }
 
   private List<Expense> buildExpenses(Cursor cursor) {
@@ -132,5 +129,15 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
 
   private boolean isCursorPopulated(Cursor cursor) {
     return cursor != null && cursor.moveToFirst();
+  }
+
+  private void seedExpenseTypes(SQLiteDatabase sqLiteDatabase) {
+    List<ExpenseType> expenseTypes = ExpenseTypeTable.seedData();
+    for (ExpenseType expenseType : expenseTypes) {
+      ContentValues contentValues = new ContentValues();
+      contentValues.put(ExpenseTypeTable.TYPE, expenseType.getType());
+
+      sqLiteDatabase.insert(ExpenseTypeTable.TABLE_NAME, null, contentValues);
+    }
   }
 }

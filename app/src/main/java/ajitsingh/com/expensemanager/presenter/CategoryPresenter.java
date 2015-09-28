@@ -20,7 +20,7 @@ public class CategoryPresenter {
       return false;
     }
 
-    database.addCategory(new ExpenseType(newCategory));
+    database.addExpenseType(new ExpenseType(newCategory));
     return true;
   }
 }
