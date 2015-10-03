@@ -1,7 +1,5 @@
 package ajitsingh.com.expensemanager.presenter;
 
-import android.graphics.Color;
-
 import com.echo.holographlibrary.Bar;
 
 import java.util.ArrayList;

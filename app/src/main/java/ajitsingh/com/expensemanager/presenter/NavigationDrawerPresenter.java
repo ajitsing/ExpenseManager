@@ -6,6 +6,9 @@ import ajitsingh.com.expensemanager.view.NavigationDrawerItemView;
 
 public class NavigationDrawerPresenter {
 
+  public static final String THIS_WEEK = "This Week";
+  public static final String THIS_MONTH = "This Month";
+  public static final String HOME = "Home";
   private NavigationDrawerItemView view;
 
   public NavigationDrawerPresenter(NavigationDrawerItemView view) {
@@ -14,13 +17,13 @@ public class NavigationDrawerPresenter {
 
   public void onItemSelected(String drawerItem) {
     switch (drawerItem){
-      case "This Week":
+      case THIS_WEEK:
         view.render(new CurrentWeekExpenseFragment());
         break;
-      case "This Month":
+      case THIS_MONTH:
         view.render(new CurrentMonthExpenseFragment());
         break;
-      case "Home":
+      case HOME:
         view.goToHome();
         break;
     }
