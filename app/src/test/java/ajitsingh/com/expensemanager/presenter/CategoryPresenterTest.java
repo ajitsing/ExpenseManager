@@ -37,7 +37,7 @@ public class CategoryPresenterTest {
     ArgumentCaptor<ExpenseType> expenseTypeCaptor = ArgumentCaptor.forClass(ExpenseType.class);
 
     assertTrue(presenter.addCategory());
-    verify(database).addCategory(expenseTypeCaptor.capture());
+    verify(database).addExpenseType(expenseTypeCaptor.capture());
 
     ExpenseType expenseType = expenseTypeCaptor.getValue();
     assertThat(expenseType.getType(), is("Movie"));

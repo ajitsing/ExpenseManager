@@ -3,6 +3,8 @@ package ajitsingh.com.expensemanager.database;
 
 import android.support.test.runner.AndroidJUnit4;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,7 +12,9 @@ import org.junit.runner.RunWith;
 
 import java.util.List;
 
+import ajitsingh.com.expensemanager.model.Expense;
 import ajitsingh.com.expensemanager.model.ExpenseType;
+import ajitsingh.com.expensemanager.table.ExpenseTable;
 import ajitsingh.com.expensemanager.table.ExpenseTypeTable;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
@@ -28,11 +32,15 @@ public class ExpenseDatabaseHelperTest {
     getTargetContext().deleteDatabase(ExpenseDatabaseHelper.EXPENSE_DB);
     database = new ExpenseDatabaseHelper(getTargetContext());
     database.truncate(ExpenseTypeTable.TABLE_NAME);
+    database.truncate(ExpenseTable.TABLE_NAME);
+
+    freezeDate("2015-10-02");
   }
 
   @After
   public void tearDown() throws Exception {
     database.close();
+    DateTimeUtils.setCurrentMillisSystem();
   }
 
   @Test
@@ -42,5 +50,35 @@ public class ExpenseDatabaseHelperTest {
     List<String> expenseTypes = database.getExpenseTypes();
     assertThat(expenseTypes.size(), is(1));
     assertTrue(expenseTypes.get(0).equals("Food"));
+  }
+
+  @Test
+  public void shouldReturnCurrentMonthsExpenses() throws Exception {
+    database.addExpense(new Expense(100l, "Food", "31-09-2015"));
+    database.addExpense(new Expense(200l, "Food", "02-10-2015"));
+
+    List<Expense> expenses = database.getExpensesForCurrentMonthGroupByCategory();
+
+    assertThat(expenses.size(), is(1));
+    assertThat(expenses.get(0).getAmount(), is(200l));
+  }
+
+  @Test
+  public void shouldReturnCurrentMonthsExpensesForMultipleExpenseTypes() throws Exception {
+    database.addExpense(new Expense(100l, "Food", "31-09-2015"));
+    database.addExpense(new Expense(200l, "Food", "02-10-2015"));
+
+    database.addExpense(new Expense(300l, "Travel", "10-10-2015"));
+    database.addExpense(new Expense(200l, "Travel", "02-10-2015"));
+
+    database.addExpense(new Expense(500l, "Movie", "02-09-2015"));
+
+    List<Expense> expenses = database.getExpensesForCurrentMonthGroupByCategory();
+
+    assertThat(expenses.size(), is(2));
+  }
+
+  private void freezeDate(String date) {
+    DateTimeUtils.setCurrentMillisFixed(new DateTime(date).getMillis());
   }
 }
