@@ -1,0 +1,1 @@
+./gradlew testDebug && ./gradlew cC
