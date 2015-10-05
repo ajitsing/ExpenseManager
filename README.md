@@ -1,7 +1,7 @@
 # ExpenseManager
 Android app to manage expenses
 
-###Download the latest app from here - https://goo.gl/lgW2Uv
+####Download the latest app from the release tab
 
 ####Few Screen Shots Of The App
 
