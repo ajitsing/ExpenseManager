@@ -21,6 +21,7 @@ import android.widget.ListView;
 import ajitsingh.com.expensemanager.R;
 import ajitsingh.com.expensemanager.adapter.DrawerListViewAdapter;
 import ajitsingh.com.expensemanager.adapter.HomeViewPagerAdapter;
+import ajitsingh.com.expensemanager.notification.FillExpenseNotificationScheduler;
 import ajitsingh.com.expensemanager.presenter.NavigationDrawerPresenter;
 import ajitsingh.com.expensemanager.view.NavigationDrawerItemView;
 
@@ -32,9 +33,10 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerIt
   private ActionBarDrawerToggle actionBarDrawerToggle;
   private DrawerLayout drawerLayout;
   public static final int ADD_NEW_CAT = 9991;
+  private static Boolean isNotificationScheduled = false;
 
   @Override
-  protected void onCreate(Bundle savedInstanceState){
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
@@ -61,6 +63,8 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerIt
       public void onPageScrollStateChanged(int i) {
       }
     });
+
+    if (!isNotificationScheduled) scheduleReminder();
   }
 
   @Override
@@ -84,7 +88,7 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerIt
   public void onBackPressed() {
     super.onBackPressed();
     int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
-    if(backStackEntryCount == 0)
+    if (backStackEntryCount == 0)
       actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
     actionBar.setTitle(R.string.app_name);
   }
@@ -123,7 +127,7 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerIt
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
-    if(requestCode == ADD_NEW_CAT){
+    if (requestCode == ADD_NEW_CAT) {
       viewPager.setAdapter(new HomeViewPagerAdapter(getSupportFragmentManager()));
       viewPager.setCurrentItem(0);
     }
@@ -160,7 +164,7 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerIt
   private void configureDrawer() {
     drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
 
-    actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.mipmap.ic_menu_closed, R.string.app_name, R.string.action_settings){
+    actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.mipmap.ic_menu_closed, R.string.app_name, R.string.action_settings) {
       @Override
       public void onDrawerOpened(View drawerView) {
         super.onDrawerOpened(drawerView);
@@ -194,5 +198,10 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerIt
         mainFrame.bringToFront();
       }
     });
+  }
+
+  private void scheduleReminder() {
+    new FillExpenseNotificationScheduler().schedule(this);
+    isNotificationScheduled = true;
   }
 }
