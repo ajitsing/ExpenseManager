@@ -2,6 +2,7 @@ package ajitsingh.com.expensemanager.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,8 +67,9 @@ public class ExpenseFragment extends Fragment implements ExpenseView, View.OnCli
   @Override
   public void onClick(View view) {
     if(expensePresenter.addExpense()){
-      Toast.makeText(getActivity(), R.string.expense_add_successfully, Toast.LENGTH_LONG).show();
-      getActivity().getActionBar().setSelectedNavigationItem(1);
+      MainActivity activity = (MainActivity) getActivity();
+      Toast.makeText(activity, R.string.expense_add_successfully, Toast.LENGTH_LONG).show();
+      activity.onExpenseAdded();
     }
   }
 }
