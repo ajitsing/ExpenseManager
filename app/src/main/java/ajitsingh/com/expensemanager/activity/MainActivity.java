@@ -57,7 +57,7 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerIt
 
     fragmentManager.beginTransaction()
       .addToBackStack(MainActivity.class.getSimpleName())
-      .add(R.id.main_frame, fragment, fragment.getClass().getSimpleName())
+      .replace(R.id.main_frame, fragment, fragment.getClass().getSimpleName())
       .commit();
 
     actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
