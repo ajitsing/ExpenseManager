@@ -19,7 +19,6 @@ import ajitsingh.com.expensemanager.presenter.ExpensePresenter;
 import ajitsingh.com.expensemanager.view.ExpenseView;
 
 public class ExpenseFragment extends Fragment implements ExpenseView, View.OnClickListener {
-  private ExpensePresenter expensePresenter;
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,8 +30,9 @@ public class ExpenseFragment extends Fragment implements ExpenseView, View.OnCli
     super.onActivityCreated(savedInstanceState);
 
     ExpenseDatabaseHelper expenseDatabaseHelper = new ExpenseDatabaseHelper(this.getActivity());
-    expensePresenter = new ExpensePresenter(expenseDatabaseHelper, this);
+    ExpensePresenter expensePresenter = new ExpensePresenter(expenseDatabaseHelper, this);
     expensePresenter.setExpenseTypes();
+    expenseDatabaseHelper.close();
 
     Button addExpenseButton = (Button) getActivity().findViewById(R.id.add_expense);
     addExpenseButton.setOnClickListener(this);
@@ -65,10 +65,13 @@ public class ExpenseFragment extends Fragment implements ExpenseView, View.OnCli
 
   @Override
   public void onClick(View view) {
+    ExpenseDatabaseHelper expenseDatabaseHelper = new ExpenseDatabaseHelper(this.getActivity());
+    ExpensePresenter expensePresenter = new ExpensePresenter(expenseDatabaseHelper, this);
     if(expensePresenter.addExpense()){
       MainActivity activity = (MainActivity) getActivity();
       Toast.makeText(activity, R.string.expense_add_successfully, Toast.LENGTH_LONG).show();
       activity.onExpenseAdded();
     }
+    expenseDatabaseHelper.close();
   }
 }

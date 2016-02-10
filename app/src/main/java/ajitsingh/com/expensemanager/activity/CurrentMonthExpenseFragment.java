@@ -34,6 +34,7 @@ public class CurrentMonthExpenseFragment extends Fragment implements CurrentMont
 
     presenter.plotGraph();
     presenter.showTotalExpense();
+    expenseDatabaseHelper.close();
   }
 
   @Override

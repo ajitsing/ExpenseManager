@@ -32,6 +32,7 @@ public class TodaysExpenseFragment extends Fragment implements TodaysExpenseView
 
     todaysExpensePresenter.renderTodaysExpenses();
     todaysExpensePresenter.renderTotalExpense();
+    expenseDatabaseHelper.close();
   }
 
   @Override

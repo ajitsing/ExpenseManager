@@ -33,6 +33,7 @@ public class CurrentWeekExpenseFragment extends Fragment implements CurrentWeekE
     CurrentWeekExpensePresenter presenter = new CurrentWeekExpensePresenter(expenseDatabaseHelper, this);
     presenter.renderTotalExpenses();
     presenter.renderCurrentWeeksExpenses();
+    expenseDatabaseHelper.close();
   }
 
   @Override
