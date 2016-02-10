@@ -14,3 +14,10 @@ Android app to manage expenses
 ![Alt text](https://github.com/ajitsing/ScreenShots/blob/master/em_week.png)
 
 ![Alt text](https://github.com/ajitsing/ScreenShots/blob/master/em_month_graph.png)
+
+
+####Licence
+
+The MIT License (MIT)
+
+Copyright (c) 2016 Ajit Singh
