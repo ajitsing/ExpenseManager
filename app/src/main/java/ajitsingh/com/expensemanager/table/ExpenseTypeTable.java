@@ -1,6 +1,5 @@
 package ajitsingh.com.expensemanager.table;
 
-import android.content.ContentValues;
 import android.provider.BaseColumns;
 
 import java.util.ArrayList;

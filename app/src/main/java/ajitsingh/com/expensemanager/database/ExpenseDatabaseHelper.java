@@ -55,6 +55,13 @@ public class ExpenseDatabaseHelper extends SQLiteOpenHelper {
     return expenseTypes;
   }
 
+  public void deleteAll() {
+    SQLiteDatabase database = this.getWritableDatabase();
+    database.delete(ExpenseTypeTable.TABLE_NAME, "", new String[]{});
+    database.delete(ExpenseTable.TABLE_NAME, "", new String[]{});
+    database.close();
+  }
+
   public void addExpense(Expense expense) {
     SQLiteDatabase database = this.getWritableDatabase();
     ContentValues values = new ContentValues();

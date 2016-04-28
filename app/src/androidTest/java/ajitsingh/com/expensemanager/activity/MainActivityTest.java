@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import ajitsingh.com.expensemanager.R;
+import ajitsingh.com.expensemanager.rule.DatabaseResetRule;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onData;
@@ -31,6 +32,9 @@ public class MainActivityTest {
   @Rule
   public ActivityTestRule activityTestRule = new ActivityTestRule(MainActivity.class);
 
+  @Rule
+  public DatabaseResetRule databaseResetRule = new DatabaseResetRule();
+
   @Test
   public void shouldDisplayExpenseButton() throws Exception {
     activityTestRule.launchActivity(new Intent());
@@ -43,7 +47,7 @@ public class MainActivityTest {
     openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
     onView(withText(R.string.action_add_category)).perform(click());
 
-    final String expenseType = "Hello11";
+    final String expenseType = "Hello";
     onView(withId(R.id.category)).perform(typeText(expenseType));
     onView(withId(R.id.add_category)).perform(click());
     pressBack();
