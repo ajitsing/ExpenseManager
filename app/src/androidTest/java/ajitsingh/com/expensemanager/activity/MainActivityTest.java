@@ -1,6 +1,7 @@
 package ajitsingh.com.expensemanager.activity;
 
 import android.content.Intent;
+import android.support.test.espresso.contrib.DrawerActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -59,5 +60,19 @@ public class MainActivityTest {
     onView(withId(R.id.add_expense)).perform(click());
 
     onView(withText(expenseType + " - 100")).check(matches(isDisplayed()));
+  }
+
+  @Test
+  public void shouldAddExpenseVerifyOnWeekExpenseDetails() throws Exception {
+    activityTestRule.launchActivity(new Intent());
+    onView(withId(R.id.amount)).perform(typeText("100"));
+    onView(withId(R.id.expense_type)).perform(click());
+    onData(allOf(is(instanceOf(String.class)), is("Health"))).perform(click());
+    onView(withId(R.id.add_expense)).perform(click());
+
+    DrawerActions.openDrawer(R.id.drawer);
+
+    onView(withText("This Week")).perform(click());
+    onView(withText("Total Expense - \u20B9100"));
   }
 }
