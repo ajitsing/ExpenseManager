@@ -20,10 +20,11 @@ public class DatabaseResetRule implements TestRule {
       @Override
       public void evaluate() throws Throwable {
         try {
+          clearDatabase();
+          seedData();
           base.evaluate();
         } finally {
           clearDatabase();
-          seedData();
         }
       }
     };
