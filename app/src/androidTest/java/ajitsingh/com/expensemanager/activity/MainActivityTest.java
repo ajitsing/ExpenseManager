@@ -10,8 +10,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import ajitsingh.com.expensemanager.R;
+import ajitsingh.com.expensemanager.rule.DatabaseResetRule;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.swipeRight;
+import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static android.support.test.espresso.matcher.ViewMatchers.hasSibling;
@@ -34,6 +38,9 @@ import static org.hamcrest.core.AllOf.allOf;
 public class MainActivityTest {
   @Rule
   public ActivityTestRule rule = new ActivityTestRule(MainActivity.class, true, false);
+
+  @Rule
+  public DatabaseResetRule databaseResetRule = new DatabaseResetRule();
 
   @Test
   public void shouldRenderView() throws Exception {
@@ -73,5 +80,17 @@ public class MainActivityTest {
 
     onView(allOf(withHint(R.id.amount), isDescendantOfA(withId(R.id.add_expense_container))))
         .check(matches(isDisplayed()));
+  }
+
+  @Test
+  public void thirdTestViewActions() throws Exception {
+    rule.launchActivity(new Intent());
+
+    onView(withId(R.id.amount)).perform(typeText("200"));
+    onView(withId(R.id.add_expense)).perform(click());
+
+    onView(withText("Food - 200")).check(matches(isDisplayed()));
+
+    onView(withId(R.id.view_pager)).perform(swipeRight());
   }
 }
