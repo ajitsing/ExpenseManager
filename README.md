@@ -1,4 +1,7 @@
 # ExpenseManager
+
+[![Twitter](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/Ajit5ingh)
+
 Android app to manage expenses
 
 #### Download the latest app from the release tab
