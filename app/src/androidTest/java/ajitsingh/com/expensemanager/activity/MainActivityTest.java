@@ -49,48 +49,48 @@ public class MainActivityTest {
     onView(withId(R.id.add_new_expense_id)).check(matches(withText(R.string.add_new_expense)));
     onView(withId(R.id.add_expense)).check(matches(isDisplayed()));
   }
-
-  @Test
-  public void secondTest() throws Exception {
-    /*
-    withSpinnerText
-    isCompletelyDisplayed
-    hasSibling
-    hasDescendant
-    isDescendantOfA
-    isClickable
-    withEffectiveVisibility
-    allOf
-    withHint
-    * */
-
-    rule.launchActivity(new Intent());
-
-    onView(withId(R.id.expense_type)).check(matches(withSpinnerText("Food")));
-    onView(withId(R.id.expense_type)).check(matches(isCompletelyDisplayed()));
-
-    onView(withId(R.id.amount)).check(matches(hasSibling(withId(R.id.expense_type))));
-    onView(withId(R.id.amount)).check(matches(hasSibling(withId(R.id.add_expense))));
-
-    onView(withId(R.id.add_expense_container)).check(matches(hasDescendant(withId(R.id.amount))));
-    onView(withId(R.id.amount)).check(matches(isDescendantOfA(withId(R.id.add_expense_container))));
-
-    onView(withId(R.id.add_expense)).check(matches(isClickable()));
-    onView(withId(R.id.add_expense)).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
-
-    onView(allOf(withHint(R.id.amount), isDescendantOfA(withId(R.id.add_expense_container))))
-        .check(matches(isDisplayed()));
-  }
-
-  @Test
-  public void thirdTestViewActions() throws Exception {
-    rule.launchActivity(new Intent());
-
-    onView(withId(R.id.amount)).perform(typeText("200"));
-    onView(withId(R.id.add_expense)).perform(click());
-
-    onView(withText("Food - 200")).check(matches(isDisplayed()));
-
-    onView(withId(R.id.view_pager)).perform(swipeRight());
-  }
+//
+//  @Test
+//  public void secondTest() throws Exception {
+//    /*
+//    withSpinnerText
+//    isCompletelyDisplayed
+//    hasSibling
+//    hasDescendant
+//    isDescendantOfA
+//    isClickable
+//    withEffectiveVisibility
+//    allOf
+//    withHint
+//    * */
+//
+//    rule.launchActivity(new Intent());
+//
+//    onView(withId(R.id.expense_type)).check(matches(withSpinnerText("Food")));
+//    onView(withId(R.id.expense_type)).check(matches(isCompletelyDisplayed()));
+//
+//    onView(withId(R.id.amount)).check(matches(hasSibling(withId(R.id.expense_type))));
+//    onView(withId(R.id.amount)).check(matches(hasSibling(withId(R.id.add_expense))));
+//
+//    onView(withId(R.id.add_expense_container)).check(matches(hasDescendant(withId(R.id.amount))));
+//    onView(withId(R.id.amount)).check(matches(isDescendantOfA(withId(R.id.add_expense_container))));
+//
+//    onView(withId(R.id.add_expense)).check(matches(isClickable()));
+//    onView(withId(R.id.add_expense)).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
+//
+//    onView(allOf(withHint(R.id.amount), isDescendantOfA(withId(R.id.add_expense_container))))
+//        .check(matches(isDisplayed()));
+//  }
+//
+//  @Test
+//  public void thirdTestViewActions() throws Exception {
+//    rule.launchActivity(new Intent());
+//
+//    onView(withId(R.id.amount)).perform(typeText("200"));
+//    onView(withId(R.id.add_expense)).perform(click());
+//
+//    onView(withText("Food - 200")).check(matches(isDisplayed()));
+//
+//    onView(withId(R.id.view_pager)).perform(swipeRight());
+//  }
 }
