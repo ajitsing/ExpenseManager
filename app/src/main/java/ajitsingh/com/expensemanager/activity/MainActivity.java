@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,6 +47,24 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerIt
     configureActionBar();
 
     if (!isNotificationScheduled) scheduleReminder();
+
+    reproduceJacocoIssues();
+  }
+
+  private void reproduceJacocoIssues() {
+//    int a = 0;
+//    do {
+//      Log.d("temp", "jacoco issues");
+//      a++;
+//      for(int i= 0; i < 10; i ++) {
+//        for(int j= 0; j < 10; j ++) {
+//          Log.d("temp", "jacoco issues");
+//        }
+//        for(int k= 0; k < 10; k ++) {
+//          Log.d("temp", "jacoco issues");
+//        }
+//      }
+//    } while (a < 10);
   }
 
   @Override
