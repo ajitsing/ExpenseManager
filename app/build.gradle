@@ -108,7 +108,6 @@ dependencies {
     androidTestCompile 'com.google.dexmaker:dexmaker:1.2'
     androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
     androidTestCompile 'com.squareup.spoon:spoon-client:1.5.4'
-    androidTestCompile 'com.squareup.okhttp:mockwebserver:2.7.5'
     androidTestCompile 'com.natpryce:make-it-easy:4.0.1'
     androidTestCompile 'xmlunit:xmlunit:1.6'
 }
