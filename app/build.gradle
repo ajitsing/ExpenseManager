@@ -16,7 +16,7 @@ jacoco {
 }
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 24
     buildToolsVersion "25.0.0"
 
     defaultConfig {
@@ -24,7 +24,7 @@ android {
         applicationId "ajitsingh.com.expensemanager"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         minSdkVersion 19
-        targetSdkVersion 25
+        targetSdkVersion 24
         versionCode 1
         versionName "1.1"
     }
@@ -40,13 +40,26 @@ android {
     }
 
     packagingOptions {
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
         exclude 'LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
     }
+
+    dataBinding {
+        enabled = true
+    }
+
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:support-v4:25.0.0'
+    compile 'com.android.support:support-v4:25.1.1'
     compile 'org.quanqi:android-holo-graph:0.1.0'
     compile 'joda-time:joda-time:2.8.2'
 
@@ -57,7 +70,7 @@ dependencies {
     }
 
     androidTestCompile 'com.android.support.test:rules:0.3'
-    androidTestCompile 'com.android.support:support-v4:25.0.0'
+    androidTestCompile 'com.android.support:support-v4:25.1.1'
 
     compile 'org.apache.commons:commons-lang3:3.5'
     compile('com.crashlytics.sdk.android:crashlytics:2.5.0@aar') {
@@ -80,20 +93,20 @@ dependencies {
         exclude module: 'objenesis'
     }
 
-    androidTestCompile("com.android.support.test.espresso:espresso-core:2.2") {
+    androidTestCompile("com.android.support.test.espresso:espresso-core:2.2.2") {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-    androidTestCompile("com.android.support.test.espresso:espresso-intents:2.2") {
+    androidTestCompile("com.android.support.test.espresso:espresso-intents:2.2.2") {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-    androidTestCompile("com.android.support.test.espresso:espresso-contrib:2.2") {
+    androidTestCompile("com.android.support.test.espresso:espresso-contrib:2.2.2") {
         exclude group: 'com.android.support', module: 'appcompat'
         exclude group: 'com.android.support', module: 'design'
         exclude group: 'com.android.support', module: 'support-v4'
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude module: 'recyclerview-v7'
     }
-    androidTestCompile("com.android.support.test.espresso:espresso-web:2.2") {
+    androidTestCompile("com.android.support.test.espresso:espresso-web:2.2.2") {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
     androidTestCompile("com.android.support.test:runner:0.5") {
@@ -102,7 +115,6 @@ dependencies {
     androidTestCompile('com.android.support.test:rules:0.5') {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-    androidTestCompile "com.android.support:design:25.0.0"
     androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
     androidTestCompile 'org.mockito:mockito-core:1.10.19'
     androidTestCompile 'com.google.dexmaker:dexmaker:1.2'
@@ -110,4 +122,70 @@ dependencies {
     androidTestCompile 'com.squareup.spoon:spoon-client:1.5.4'
     androidTestCompile 'com.natpryce:make-it-easy:4.0.1'
     androidTestCompile 'xmlunit:xmlunit:1.6'
+
+    compile 'com.google.zxing:core:3.2.1' //Culprit
+    compile 'com.google.code.gson:gson:2.8.0'
+    compile "com.android.support:recyclerview-v7:25.1.1"
+
+    compile "com.android.support:support-annotations:25.1.1"
+    compile "com.android.support:percent:25.1.1"
+
+      compile 'com.android.volley:volley:1.0.0'
+      compile('com.octo.android.robospice:robospice-spring-android:1.4.11') {
+              exclude group: 'org.apache.commons', module: 'commons-io'
+              exclude module: 'commons-lang3'
+          }
+
+
+
+
+
+
+    compile 'com.android.support:multidex:1.0.0'
+    compile('com.octo.android.robospice:robospice-spring-android:1.4.11') {
+                exclude group: 'org.apache.commons', module: 'commons-io'
+                exclude module: 'commons-lang3'
+            }
+
+
+      compile "com.google.android.gms:play-services-wearable:10.0.1"
+      compile "com.google.android.gms:play-services-location:10.0.1"
+      compile "com.google.android.gms:play-services-maps:10.0.1"
+      compile "com.google.android.gms:play-services-gcm:10.0.1"
+    compile "com.google.firebase:firebase-appindexing:10.0.1"
+
+     compile ('com.github.jainsahab:Snooper-Spring:1.0.2@aar'){
+             transitive = true
+             exclude group: 'org.springframework.android'
+             exclude group: 'com.android.databinding'
+         }
+
+    compile('org.springframework.android:spring-android-auth:1.0.1.RELEASE') {
+        exclude module: 'spring-core'
+    }
+    compile 'io.card:android-sdk:5.5.0'
+    compile 'org.sonatype.sisu.inject:cglib:3.1.1'
+    compile('org.roboguice:roboguice:2.0') {
+        exclude module: 'cglib'
+    }
+    compile 'org.slf4j:slf4j-api:1.7.22'
+    compile 'com.x5dev:chunk-templates:3.2.4'
+    compile 'org.codehaus.jackson:jackson-core-asl:1.9.4'
+    compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.4'
+    compile 'com.darwinsys:hirondelle-date4j:1.5.1'
+
+    testCompile('org.robolectric:robolectric:3.1.2') {
+        exclude group: 'org.apache.httpcomponents', module: 'httpcore'
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+    }
+
+    testCompile 'org.json:json:20160810'
+    testCompile 'com.natpryce:make-it-easy:4.0.1'
+    testCompile 'org.apache.httpcomponents:httpclient:4.5.2'
+}
+
+configurations.all {
+    resolutionStrategy {
+        force 'org.ow2.asm:asm:5.0.1'
+    }
 }
