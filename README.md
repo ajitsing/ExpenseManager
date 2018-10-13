@@ -1,6 +1,8 @@
 # ExpenseManager
 
 [![Twitter Follow](https://img.shields.io/twitter/follow/Ajit5ingh.svg?style=social)](https://twitter.com/Ajit5ingh)
+[![HitCount](http://hits.dwyl.io/ajitsing/ExpenseManager.svg)](http://hits.dwyl.io/ajitsing/ExpenseManager)
+
 
 Android app to manage expenses
 
