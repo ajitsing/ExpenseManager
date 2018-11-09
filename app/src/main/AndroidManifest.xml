@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.AddCategoryActivity"/>
+        <activity android:name=".activity.ChangeCurrencyActivity"/>
 
         <receiver android:name=".receiver.FillExpenseNotificationReceiver">
             <intent-filter>

@@ -12,6 +12,7 @@ import java.util.List;
 
 import ajitsingh.com.expensemanager.R;
 import ajitsingh.com.expensemanager.adapter.TodaysExpenseListViewAdapter;
+import ajitsingh.com.expensemanager.database.CurrencyPreferencesHelper;
 import ajitsingh.com.expensemanager.database.ExpenseDatabaseHelper;
 import ajitsingh.com.expensemanager.model.Expense;
 import ajitsingh.com.expensemanager.presenter.TodaysExpensePresenter;
@@ -38,7 +39,8 @@ public class TodaysExpenseFragment extends Fragment implements TodaysExpenseView
   @Override
   public void displayTotalExpense(Long totalExpense) {
     TextView totalExpenseTextBox = (TextView) getActivity().findViewById(R.id.total_expense);
-    totalExpenseTextBox.setText(getActivity().getString(R.string.total_expense) + " " + getActivity().getString(R.string.rupee_sym) + totalExpense.toString());
+    CurrencyPreferencesHelper preferencesHelper = new CurrencyPreferencesHelper(getActivity());
+    totalExpenseTextBox.setText(getActivity().getString(R.string.total_expense) + " " + preferencesHelper.getActualCurrency() + totalExpense.toString());
   }
 
   @Override

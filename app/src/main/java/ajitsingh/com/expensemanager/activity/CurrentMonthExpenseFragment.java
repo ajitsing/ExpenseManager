@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ajitsingh.com.expensemanager.R;
+import ajitsingh.com.expensemanager.database.CurrencyPreferencesHelper;
 import ajitsingh.com.expensemanager.database.ExpenseDatabaseHelper;
 import ajitsingh.com.expensemanager.presenter.CurrentMonthExpensePresenter;
 import ajitsingh.com.expensemanager.view.CurrentMonthExpenseView;
@@ -46,7 +47,8 @@ public class CurrentMonthExpenseFragment extends Fragment implements CurrentMont
   @Override
   public void displayTotalExpense(Long totalExpense) {
     TextView totalExpenseTextBox = (TextView) getActivity().findViewById(R.id.current_months_total_expense);
-    totalExpenseTextBox.setText(getString(R.string.total_expense) + " " + getString(R.string.rupee_sym) + totalExpense);
+    CurrencyPreferencesHelper preferencesHelper = new CurrencyPreferencesHelper(getActivity());
+    totalExpenseTextBox.setText(getString(R.string.total_expense) + " " + preferencesHelper.getActualCurrency() + totalExpense);
   }
 
   @Override

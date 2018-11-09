@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import ajitsingh.com.expensemanager.R;
+import ajitsingh.com.expensemanager.database.CurrencyPreferencesHelper;
 import ajitsingh.com.expensemanager.model.Expense;
 import ajitsingh.com.expensemanager.utils.ExpenseCollection;
 
@@ -20,10 +21,12 @@ import static ajitsingh.com.expensemanager.utils.DateUtil.getDayName;
 public class CurrentWeeksExpenseAdapter implements ExpandableListAdapter {
   private Context context;
   private final Map<String, List<Expense>> expenses;
+  private CurrencyPreferencesHelper preferencesHelper;
 
   public CurrentWeeksExpenseAdapter(Context context, Map<String, List<Expense>> expenses) {
     this.context = context;
     this.expenses = expenses;
+    preferencesHelper = new CurrencyPreferencesHelper(context);
   }
 
   @Override
@@ -50,8 +53,8 @@ public class CurrentWeeksExpenseAdapter implements ExpandableListAdapter {
   public Object getGroup(int position) {
     String date = (String) this.expenses.keySet().toArray()[position];
     Long totalExpense = new ExpenseCollection(this.expenses.get(date)).getTotalExpense();
-
-    return date + " (" + getDayName(date) + ") - " + context.getString(R.string.rupee_sym) + totalExpense;
+    CurrencyPreferencesHelper preferencesHelper = new CurrencyPreferencesHelper(context);
+    return date + " (" + getDayName(date) + ") - " + preferencesHelper.getActualCurrency() + totalExpense;
   }
 
   @Override
