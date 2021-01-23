@@ -10,7 +10,7 @@ import ajitsingh.com.expensemanager.database.ExpenseDatabaseHelper;
 import ajitsingh.com.expensemanager.model.ExpenseType;
 import ajitsingh.com.expensemanager.table.ExpenseTypeTable;
 
-import static android.support.test.InstrumentationRegistry.getInstrumentation;
+import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
 
 public class DatabaseResetRule implements TestRule {
 

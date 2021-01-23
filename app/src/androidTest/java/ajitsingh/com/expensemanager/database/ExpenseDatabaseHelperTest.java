@@ -1,7 +1,9 @@
 package ajitsingh.com.expensemanager.database;
 
+import android.content.Context;
 
-import android.support.test.runner.AndroidJUnit4;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
@@ -18,7 +20,6 @@ import ajitsingh.com.expensemanager.model.ExpenseType;
 import ajitsingh.com.expensemanager.table.ExpenseTable;
 import ajitsingh.com.expensemanager.table.ExpenseTypeTable;
 
-import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsCollectionContaining.hasItems;
 import static org.junit.Assert.assertThat;
@@ -121,5 +122,9 @@ public class ExpenseDatabaseHelperTest {
 
   private void freezeDate(String date) {
     DateTimeUtils.setCurrentMillisFixed(new DateTime(date).getMillis());
+  }
+
+  private Context getTargetContext() {
+    return InstrumentationRegistry.getInstrumentation().getTargetContext();
   }
 }

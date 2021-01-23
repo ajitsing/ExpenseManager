@@ -1,10 +1,11 @@
 package ajitsingh.com.expensemanager.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.FragmentActivity;
 
 import ajitsingh.com.expensemanager.R;
 import ajitsingh.com.expensemanager.database.ExpenseDatabaseHelper;
