@@ -35,6 +35,7 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerIt
   private ActionBarDrawerToggle actionBarDrawerToggle;
   private DrawerLayout drawerLayout;
   public static final int ADD_NEW_CAT = 9991;
+  public static final int SELECT_ANOTHER_CURRENCY = 9992;
   private static Boolean isNotificationScheduled = false;
   private HomeViewPagerAdapter homeViewPagerAdapter;
 
@@ -106,6 +107,11 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerIt
       startActivityForResult(intent, ADD_NEW_CAT);
       return true;
     }
+    if (id == R.id.action_change_currency) {
+      Intent intent = new Intent(this, ChangeCurrencyActivity.class);
+      startActivityForResult(intent, SELECT_ANOTHER_CURRENCY);
+      return true;
+    }
 
     return actionBarDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
   }
@@ -116,6 +122,9 @@ public class MainActivity extends FragmentActivity implements NavigationDrawerIt
     if (requestCode == ADD_NEW_CAT) {
       viewPager.setAdapter(new HomeViewPagerAdapter(getSupportFragmentManager()));
       viewPager.setCurrentItem(0);
+    }
+    if (requestCode == SELECT_ANOTHER_CURRENCY) {
+      goToHome();
     }
   }
 

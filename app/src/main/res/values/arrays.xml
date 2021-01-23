@@ -7,4 +7,16 @@
         <item>Rent</item>
         <item>Other</item>
     </array>
+    <array name="currency_types">
+        <item>Dollar $</item>
+        <item>Rupee ₹</item>
+        <item>Euro €</item>
+        <item>Yuan ¥</item>
+    </array>
+    <array name="currency_symbols">
+        <item>$</item>
+        <item>₹</item>
+        <item>€</item>
+        <item>¥</item>
+    </array>
 </resources>

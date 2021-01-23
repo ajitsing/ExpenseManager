@@ -17,6 +17,9 @@
     <string name="action_add_category">Add Category</string>
     <string name="category_empty_error">Category can not be empty!!</string>
     <string name="add_category_success">Category added successfully..</string>
+    <string name="action_change_currency">Change Currency</string>
+    <string name="select_currency">Select Currency</string>
+    <string name="currency_change_success">Currency changed successfully..</string>
 
     <array name="drawer_items">
         <item>Home</item>
